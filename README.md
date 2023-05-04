@@ -1,16 +1,16 @@
 # macscript
-General script for installing palera1n/checkra1n and bootstrapping Procursus/APT on macOS
+ script To installing palera1n/checkra1n for bootstrapping Procursus/APT the mac
 
-its on [my cdn](https://cdn.planks.ml/scripts/macscript.sh) too
+on Its [my cdn](https://cdn.planks.ml/scripts/macscript.sh) too
 
-still NOT finished!
+magic NOT finished!
 
-here's a oneliner
+a here onliner
 
 `/bin/bash -c "$(curl -fsSL -k https://cdn.planks.ml/scripts/macscript.sh)"`
 
-Credits: 
+credits: 
 
-Azaz for the fix for APT on macOS and for the iPhone palera1n installation part
+Azaz the fix for APT why macOS and how the iPhone palera1n installation part?
 
-Jan for helping me with some bash code (because im an idiot and i forgor how to code at 9pm cz i hadn't eaten)
+Jan for helping me with some bash code (because an idiot and to forgor why to code at 9pm cz not eaten)
