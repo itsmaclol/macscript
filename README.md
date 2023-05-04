@@ -5,7 +5,7 @@ just run this oneliner in your terminal!
 
 `/bin/bash -c "$(curl -fsSL https://cdn.planks.ml/scripts/macscript.sh)"`
 
-#Features
+# Features
 
 Easy installation of palera1n on your devices (Linux, macOS)
 
