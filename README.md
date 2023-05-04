@@ -9,4 +9,8 @@ here's a oneliner
 
 `/bin/bash -c "$(curl -fsSL -k https://cdn.planks.ml/scripts/macscript.sh)"`
 
-Credits to azaz for the fix for APT on macOS and for the iPhone palera1n installation part
+Credits: 
+
+Azaz for the fix for APT on macOS and for the iPhone palera1n installation part
+
+Jan for helping me with some bash code (because im an idiot and i forgor how to code at 9pm cz i hadn't eaten)
