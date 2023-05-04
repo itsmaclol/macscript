@@ -1,8 +1,11 @@
-#!/bin/bash
+#!/usr/bin/env bash
+#variable defenitions
+if [ "$(id -u)" -ne 0 ]; then echo "Please run as root." >&2; exit 1; fi
 FLAG_FILE=~/Documents/dependencies_have_been_installed_DO_NOT_DELETE
 LINUX_FLAG_FILE=~/Documents/updates_and_dependencies_have_been_installed_DO_NOT_DELETE
-if [ "$(id -u)" -ne 0 ]; then echo "Please run as root." >&2; exit 1; fi
-# Function to display submenu 1
+if [[ $(uname) == "Darwin" ]]; then
+    macos_version=$(uname -r)
+fi
 function palera1n {
 if [[ $(uname) == "Linux" ]]; then
     if [ -f "$LINUX_FLAG_FILE" ]; then
@@ -13,16 +16,12 @@ if [[ $(uname) == "Linux" ]]; then
     sudo apt update
     sudo apt upgrade -y
     sudo apt install curl wget usbmuxd jq -y
-    #sudo curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n-linux-$(uname -m) -o /usr/bin/palera1n
     sudo chmod +x /usr/bin/palera1n
-    url=$(curl -s 'https://api.github.com/repos/palera1n/palera1n/releases' | jq --arg uname "$(uname -m)" -r '.[0].assets[] | select(.name == "palera1n-linux-\($uname)") | .browser_download_url')
-    sudo curl -L -k "$url" -o /usr/bin/palera1n
     # Create the flag file
     sudo touch "$LINUX_FLAG_FILE"
     fi
-    #url=$(curl -s 'https://api.github.com/repos/palera1n/palera1n/releases' | jq --arg uname "$(uname -m)" -r '.[0].assets[] | select(.name == "palera1n-linux-\($uname)") | .browser_download_url')
-    #sudo curl -L -k "$url" -o /usr/bin/palera1n
-    #echo "$url"
+    url=$(curl -s 'https://api.github.com/repos/palera1n/palera1n/releases' | jq --arg uname "$(uname -m)" -r '.[0].assets[] | select(.name == "palera1n-linux-\($uname)") | .browser_download_url')
+    sudo curl -L -k "$url" -o /usr/bin/palera1n
     PS3='Please enter your choice: '
     echo "Please note that the palera1n team or me is not liable for any damage you may cause to your device, use at your own risk, you should take a backup of the device before jailbreaking"
     options=("Setup FakeFS" "Rootful" "Setup BindFS" "BindFS" "Rootless" "Safe Mode" "DFU Helper" "Enter Recovery Mode" "Exit Recovery Mode" "Quit")
@@ -74,10 +73,14 @@ elif [[ $(uname) == "Darwin" ]]; then
     else
         echo "Flag file not found. Running code that should only run once."
         echo "Installing pip dependencies..."
-    if [[ $(echo "$macos_version >= 12.2.1" | bc -l) -eq 0 ]]; then
+      if [[ $(echo "${macos_version} < 21.3.0" | bc -l) -eq 1 ]]; then
         sudo python -m ensurepip
         sudo python -m pip install setuptools xattr==0.6.4
-    fi   
+      fi
+    # if [[ $(echo "$macos_version >= 12.2" | bc -l) -eq 0 ]]; then
+    #     sudo python -m ensurepip
+    #     sudo python -m pip install setuptools xattr==0.6.4
+    # fi   
 
     # Create the flag file
     touch "$FLAG_FILE"
@@ -88,7 +91,7 @@ elif [[ $(uname) == "Darwin" ]]; then
     sudo chmod +x /usr/local/bin/palera1n
     PS3='Please enter your choice: '
     echo "Please note that the palera1n team or me is not liable for any damage you may cause to your device, use at your own risk, you should take a backup of the device before jailbreaking"
-    options=("Setup FakeFS" "Rootful" "Setup BindFS" "BindFS" "Rootless" "Safe Mode" "DFU Helper" "Enter Recovery Mode" "Exit Recovery Mode" "Restore RootFS (Rootful)" "Restore RootFS (Rootless)" "Quit")
+    options=("Setup FakeFS" "Rootful" "Setup BindFS" "BindFS" "Rootless" "Safe Mode" "Safe Mode (Rootful)" "DFU Helper" "Enter Recovery Mode" "Exit Recovery Mode" "Restore RootFS (Rootful)" "Restore RootFS (Rootless)" "Quit")
     select opt in "${options[@]}"
     do
         case $opt in
@@ -109,6 +112,9 @@ elif [[ $(uname) == "Darwin" ]]; then
                 ;;
             "Safe Mode")
                 /usr/local/bin/palera1n -s -V
+                ;;
+            "Safe Mode (Rootful)")
+                /usr/local/bin/palera1n -s -f   
                 ;;
             "DFU Helper") 
                 /usr/local/bin/palera1n -D 
@@ -135,7 +141,7 @@ elif [[ $(uname) == "Darwin" ]]; then
     echo "Unknown Operation system, Exiting..."
     exit
     fi
-#iOS Part
+iOS Part
 if [[ $(dpkg --print-architecture) == "iphoneos-arm" ]]; then #This part is also taken from azaz, thank you!
     cd /var/mobile/Documents
     curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n_2.0.0-beta.6_$(dpkg --print-architecture) -o palera1n.deb
@@ -153,7 +159,7 @@ else
 fi
 }
 
-# Function to display checkra1n 2
+# Function to display checkra1n 
 function checkra1n {
     if [[ $(uname) == "Linux" ]]; then
         if [ -f "$LINUX_FLAG_FILE" ]; then
@@ -225,6 +231,7 @@ function checkra1n {
         esac
     fi
     sudo hdiutil detach /Volumes/checkra1n\ beta\ 0.12.4\ 1/
+    sudo rm -rf /usr/local/bin/checkra1n.dmg 
 }
 
 function apt-procursus {
@@ -267,33 +274,107 @@ function apt-procursus {
         fi
 }
 
-if [[ $(uname) == "Darwin" ]]; then
+function odysseyra1n {
+    if [[ $(uname) == "Darwin" ]]; then
+        if ! command -v brew &> /dev/null
+    then
+        echo "brew not found, installing..."
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    else
+        echo "brew is already installed, continuing..."
+    fi
+     sudo -u $SUDO_USER brew install libusbmuxd
+     echo "Note that me or the checkra1n/odysseyra1n team are not responsible for any damage you may cause to your device."
+     echo "For odysseyra1n to work, you have to be jailbroken via checkra1n in the first option of the main menu."
+     echo "For odysseyra1n to work, you must NOT have opened the checkra1n app after jailbreaking, if you have done so, restore rootFS and try again"
+              while [[ ! "$choice" =~ ^[yYnN]$ ]]
+          do
+              read -p "Do you want to continue? (Y/n) " choice
+          done
+              # Handle user input
+          case "$choice" in
+              y|Y)
+                  echo "Continuing..."
+                ;;
+            n|N)
+                echo "Exiting..."
+                exit
+                ;;
+        esac
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/coolstar/Odyssey-bootstrap/master/procursus-deploy-linux-macos.sh)"
+
+    elif [[ $(uname) == "Linux" ]]; then
+        if [[ -f "$LINUX_FLAG_FILE" ]]; then
+            echo "Flag file not detected, running code that should only be run once..."
+            if [ -f "/etc/arch-release" ]; then
+                sudo pacman -S libusbmuxd
+            else
+                sudo apt-get update
+                sudo apt-get upgrade -y
+                sudo apt-get install -y libusbmuxd-tools
+            fi
+        else
+            echo "Flag file detected, skipping code that should only be run once..."
+        fi
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/coolstar/Odyssey-bootstrap/master/procursus-deploy-linux-macos.sh)"
+    else
+        echo "Unrecognized operating system"
+    fi    
+}
+
+
+if [[ "${macos_version}" == *"19."* || "${macos_version}" == *"20."* || "${macos_version}" == *"21."* ]]; then
     echo "Pick what you want to do"
-PS3='Please enter your choice: '
-options=("palera1n" "checkra1n" "Install APT on macOS" "Quit")
-select opt in "${options[@]}"
-do
-    case $opt in
-        "palera1n")
-            palera1n
-            ;;
-        "checkra1n")
-            checkra1n
-            ;;
-        "Install APT on macOS")
-            apt-procursus
-            ;;
-        "Quit")
-            exit
-            ;;
-        *) echo "Invalid option";;
+    PS3='Please enter your choice: '
+    options=("palera1n" "checkra1n" "odysseyra1n" "Install APT and bootstrap Procursus" "Quit")
+    select opt in "${options[@]}"
+    do
+        case $opt in
+            "palera1n")
+                palera1n
+                ;;
+            "checkra1n")
+                checkra1n
+                ;;
+            "odysseyra1n")
+                odysseyra1n
+                ;;
+            "Install APT and bootstrap Procursus")
+                apt-procursus    
+                ;;
+            "Quit")
+                exit
+                ;;
+            *) echo "Invalid option";;
+    esac
+done
+elif [[ $(uname) == "Darwin" ]]; then # this is extra i know dont bother me about it on discord, it still works
+    echo "Pick what you want to do"
+    PS3='Please enter your choice: '
+    options=("palera1n" "checkra1n" "odysseyra1n" "Quit")
+    select opt in "${options[@]}"
+    do
+        case $opt in
+            "palera1n")
+                palera1n
+                ;;
+            "checkra1n")
+                checkra1n
+                ;;
+            "odysseyra1n")
+                odysseyra1n
+                ;;
+            "Quit")
+                exit
+                ;;
+            *) echo "Invalid option";;
     esac
 done
 else
 # Main menu
 echo "Pick what you want to do"
 PS3='Please enter your choice: '
-options=("palera1n" "checkra1n" "Quit")
+options=("palera1n" "checkra1n" "odysseyra1n" "Quit")
 select opt in "${options[@]}"
 do
     case $opt in
@@ -302,6 +383,9 @@ do
             ;;
         "checkra1n")
             checkra1n
+            ;;
+        "odysseyra1n")
+            odysseyra1n
             ;;
         "Quit")
             break
