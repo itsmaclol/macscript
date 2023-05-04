@@ -7,7 +7,7 @@ still NOT finished!
 
 here's a oneliner
 
-`/bin/bash -c "$(curl -fsSL -k https://cdn.planks.ml/scripts/macscript.sh)"`
+`/bin/bash -c "$(curl -fsSL https://cdn.planks.ml/scripts/macscript.sh)"`
 
 Credits: 
 
