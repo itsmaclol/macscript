@@ -6,6 +6,7 @@ LINUX_FLAG_FILE=~/Documents/updates_and_dependencies_have_been_installed_DO_NOT_
 if [[ $(uname) == "Darwin" ]]; then
     macos_version=$(uname -r)
 fi
+#palera1n function
 function palera1n {
 if [[ $(uname) == "Linux" ]]; then
     if [ -f "$LINUX_FLAG_FILE" ]; then
