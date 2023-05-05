@@ -3,7 +3,7 @@ macscript is a script which makes installing palera1n,checkra1n,odysseyra1n and 
 
 just run this oneliner in your terminal!
 
-`/bin/bash -c "$(curl -fsSL https://cdn.planks.ml/scripts/macscript.sh)"`
+`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsmaclol/macscript/main/macscript.sh)"`
 
 # Features
 
