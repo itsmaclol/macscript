@@ -321,7 +321,7 @@ function odysseyra1n {
 }
 
 
-if [[ "${macos_version}" == *"19."* || "${macos_version}" == *"20."* || "${macos_version}" == *"21."* ]]; then
+if [[ "${macos_version}" == *"19."* || "${macos_version}" == *"20."* || "${macos_version}" == *"21."* || "${macos_version}" == *"22."* ]]; then
     echo "Pick what you want to do"
     PS3='Please enter your choice: '
     options=("palera1n" "checkra1n" "odysseyra1n" "Install APT and bootstrap Procursus" "Quit")
