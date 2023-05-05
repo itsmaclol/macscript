@@ -6,6 +6,8 @@ just run this oneliner in your terminal!
 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsmaclol/macscript/main/macscript.sh)"`
 
 PS: do NOT use the script on [my cdn](https://cdn.planks.ml/scripts) because it is BROKEN and very OLD
+
+GUI and macn1x (iso version of my script) coming very soon!
 # Features
 
 Easy installation of palera1n on your devices (Linux, macOS)
@@ -20,6 +22,6 @@ Credits:
 
 Azaz for the fix for APT on macOS and for the iPhone palera1n installation part
 
-Jan for helping me with some bash code (because im an idiot and i forgor how to code at 9pm cz i hadn't eaten)
+Jan for helping me with some bash code and GUI (coming s0n)
 
 Me, for.. you know, basically everything
