@@ -21,6 +21,7 @@ if [[ $(uname) == "Linux" ]]; then
     # Create the flag file
     sudo touch "$LINUX_FLAG_FILE"
     fi
+    #thx alexia for this url thingy
     url=$(curl -s 'https://api.github.com/repos/palera1n/palera1n/releases' | jq --arg uname "$(uname -m)" -r '.[0].assets[] | select(.name == "palera1n-linux-\($uname)") | .browser_download_url')
     sudo curl -L -k "$url" -o /usr/bin/palera1n
     PS3='Please enter your choice: '
@@ -74,15 +75,11 @@ elif [[ $(uname) == "Darwin" ]]; then
     else
         echo "Flag file not found. Running code that should only run once."
         echo "Installing pip dependencies..."
+        #pip dependencies (not really needed might remove in the future)
       if [[ $(echo "${macos_version} < 21.3.0" | bc -l) -eq 1 ]]; then
         sudo python -m ensurepip
         sudo python -m pip install setuptools xattr==0.6.4
       fi
-    # if [[ $(echo "$macos_version >= 12.2" | bc -l) -eq 0 ]]; then
-    #     sudo python -m ensurepip
-    #     sudo python -m pip install setuptools xattr==0.6.4
-    # fi   
-
     # Create the flag file
     touch "$FLAG_FILE"
     fi
@@ -234,7 +231,7 @@ function checkra1n {
     sudo hdiutil detach /Volumes/checkra1n\ beta\ 0.12.4\ 1/
     sudo rm -rf /usr/local/bin/checkra1n.dmg 
 }
-
+#procurusussusuusussusuus installation on macos
 function apt-procursus {
         if [[ $(uname) == "Darwin" ]]; then
             read -p "Do you want to bootstrap procursus and install apt? (y/n)" awnser
