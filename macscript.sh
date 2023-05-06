@@ -189,10 +189,20 @@ if [[ $(uname) == "Linux" ]]; then
         echo "Flag file found. Skipping code that should only run once."
     else
         echo "Flag file not found. Running code that should only run once."
+    if [ -f "/etc/arch-release" ]; then
+        sudo pacman -Sy
+        sudo pacman -Syu
+        sudo pacman -S curl wget usbmuxd jq
+    elif [ -f /etc/fedora-release ]; then
+        sudo dnf update -y
+        sudo dnf upgrade -y
+        sudo dnf install -y curl wget usbmuxd jq
+    else
+        sudo apt update
+        sudo apt upgrade -y
+        sudo apt install curl wget usbmuxd jq -y
+    fi
     sudo mkdir /usr/bin/
-    sudo apt update
-    sudo apt upgrade -y
-    sudo apt install curl wget usbmuxd jq -y
     sudo chmod +x /usr/bin/palera1n
     # Create the flag file
     sudo touch "$LINUX_FLAG_FILE"
@@ -373,7 +383,7 @@ function odysseyra1n {
         if ! command -v brew &> /dev/null
     then
         echo "brew not found, installing..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/coolstar/Odyssey-bootstrap/5d17ff3e590cb0efe400c2753a7e4dd3372a1381/procursus-deploy-linux-macos.sh)"
     else
         echo "brew is already installed, continuing..."
     fi
