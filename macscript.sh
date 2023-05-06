@@ -294,6 +294,7 @@ function checkra1n {
         # Prompt user for input
         echo "In this next screen, you need to enable untested iOS versions if you are on an iOS version higher than 14.5.1"
         echo "Please note that the checkra1n team or me is not viable for any damage you might cause to your device"
+        version=$(uname -r | cut -d '.' -f 1)
         read -p "Do you want to continue? (y/n) " choice
 
         # Loop to handle invalid input
@@ -306,7 +307,12 @@ function checkra1n {
         case "$choice" in
             y|Y)
                 echo "Continuing..."
-                    sudo /Volumes/checkra1n\ beta\ 0.12.4\ 1/checkra1n.app/Contents/MacOS/checkra1n -V -t 
+            if [ "$version" -ge 20 ]; then
+            # Run the specific code you want to execute for Ventura and higher
+                sudo /Volumes/checkra1n\ beta\ 0.12.4/checkra1n.app/Contents/MacOS/checkra1n -V -t
+            else
+                sudo /Volumes/checkra1n\ beta\ 0.12.4\ 1/checkra1n.app/Contents/MacOS/checkra1n -V -t 
+            fi
                 ;;
             n|N)
                 echo "Exiting..."
@@ -314,7 +320,11 @@ function checkra1n {
                 ;;
         esac
     fi
-    sudo hdiutil detach /Volumes/checkra1n\ beta\ 0.12.4\ 1/
+    if [ "$version" - ge 20 ]; then
+        sudo hdiutil detatch /Volumes/checkra1n\ beta\ 0.12.4
+    else
+        sudo hdiutil detach /Volumes/checkra1n\ beta\ 0.12.4\ 1/
+    fi
     sudo rm -rf /usr/local/bin/checkra1n.dmg 
 }
 #procurusussusuusussusuus installation on macos
