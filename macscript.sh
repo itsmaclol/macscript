@@ -7,6 +7,182 @@ if [[ $(uname) == "Darwin" ]]; then
     macos_version=$(uname -r)
 fi
 #palera1n function
+submenu_rootful_linux() {
+    PS3="Select an option: "
+    options=("Setup FakeFS" "Setup BindFS" "Boot" "Enter Recovery Mode" "Exit Recovery Mode" "Safe Mode" "Restore RootFS" "DFU Helper" "Back")
+    select opt in "${options[@]}"
+    do
+        case $opt in
+            "Setup FakeFS")
+                /usr/bin/palera1n -c -f -V
+                ;;
+            "Setup BindFS")
+                /usr/bin/palera1n -f -V -B
+                ;;
+            "Boot")
+                /usr/bin/palera1n -f -V  
+                ;;
+            "Enter Recovery Mode")
+                /usr/bin/palera1n -E
+                ;;
+            "Exit Recovery Mode")
+                /usr/bin/palera1n -n
+                ;;
+            "Safe Mode")
+                /usr/bin/palera1n -s
+                ;;
+            "Restore RootFS")
+                /usr/bin/palera1n --force-revert -V -f
+                ;;
+            "DFU Helper")
+                /usr/bin/palera1n -D -f -V
+                ;;
+            "Back")
+                palera1n_main_menu_linux
+                ;;
+            *) echo "Invalid option $REPLY";;
+        esac
+    done
+}
+
+submenu_rootless_linux() {
+    PS3="Select an option: "
+    options=("Boot" "Enter Recovery Mode" "Exit Recovery Mode" "DFU Helper" "Restore RootFS" "Back")
+    select opt in "${options[@]}"
+    do
+        case $opt in
+            "Boot")
+                /usr/bin/palera1n -l -V
+                ;;
+            "Enter Recovery Mode")
+                /usr/bin/palera1n -E
+                ;;
+            "Exit Recovery Mode")
+                /usr/bin/palera1n -n
+                ;;
+            "DFU Helper")
+                /usr/bin/palera1n -D -l -V
+                ;;
+            "Restore RootFS")
+                /usr/bin/palera1n --force-revert -V 
+                ;;
+            "Back")
+                palera1n_main_menu_linux
+                ;;
+            *) echo "Invalid option $REPLY";;
+        esac
+    done
+}
+
+submenu_rootful_macos() {
+    PS3="Select an option: "
+    options=("Setup FakeFS" "Setup BindFS" "Boot" "Enter Recovery Mode" "Exit Recovery Mode" "Safe Mode" "Restore RootFS" "DFU Helper" "Back")
+    select opt in "${options[@]}"
+    do
+        case $opt in
+            "Setup FakeFS")
+                /usr/local/bin/palera1n -c -f -V
+                ;;
+            "Setup BindFS")
+                /usr/local/bin/palera1n -f -V -B
+                ;;
+            "Boot")
+                /usr/local/bin/palera1n -f -V  
+                ;;
+            "Enter Recovery Mode")
+                /usr/local/bin/palera1n -E
+                ;;
+            "Exit Recovery Mode")
+                /usr/local/bin/palera1n -n
+                ;;
+            "Safe Mode")
+                /usr/local/bin/palera1n -s
+                ;;
+            "Restore RootFS")
+                /usr/local/bin/palera1n --force-revert -V -f
+                ;;
+            "DFU Helper")
+                /usr/local/bin/palera1n -D -f -V
+                ;;
+            "Back")
+                palera1n_main_menu_macos
+                ;;
+            *) echo "Invalid option $REPLY";;
+        esac
+    done
+}
+
+submenu_rootless_macos() {
+    PS3="Select an option: "
+    options=("Boot" "Enter Recovery Mode" "Exit Recovery Mode" "DFU Helper" "Restore RootFS" "Back")
+    select opt in "${options[@]}"
+    do
+        case $opt in
+            "Boot")
+                /usr/local/bin/palera1n -l -V
+                ;;
+            "Enter Recovery Mode")
+                /usr/local/bin/palera1n -E
+                ;;
+            "Exit Recovery Mode")
+                /usr/local/bin/palera1n -n
+                ;;
+            "DFU Helper")
+                /usr/local/bin/palera1n -D -l -V
+                ;;
+            "Restore RootFS")
+                /usr/local/bin/palera1n --force-revert -V 
+                ;;
+            "Back")
+                palera1n_main_menu_macos
+                ;;
+            *) echo "Invalid option $REPLY";;
+        esac
+    done
+}
+
+function palera1n_main_menu_linux {
+    PS3='Please enter your choice: '
+    echo "Please note that the palera1n team or me is not liable for any damage you may cause to your device, use at your own risk, you should take a backup of the device before jailbreaking"
+    options=("Rootless" "Rootful" "Quit")
+    select opt in "${options[@]}"
+    do
+        case $opt in
+            "Rootless")
+                submenu_rootless_linux
+                ;;
+            "Rootful")
+                submenu_rootful_linux
+                ;;        
+            "Quit")
+                exit
+                ;;
+            *) echo "invalid option $REPLY";;
+        esac
+    done
+}
+
+function palera1n_main_menu_macos {
+    PS3='Please enter your choice: '
+    echo "Please note that the palera1n team or me is not liable for any damage you may cause to your device, use at your own risk, you should take a backup of the device before jailbreaking"
+    options=("Rootless" "Rootful" "Quit")
+    select opt in "${options[@]}"
+    do
+        case $opt in
+            "Rootless")
+                submenu_rootless_macos
+                ;;
+            "Rootful")
+                submenu_rootful_macos
+                ;;        
+            "Quit")
+                exit
+                ;;
+            *) echo "invalid option $REPLY";;
+        esac
+    done
+}
+
 function palera1n {
 if [[ $(uname) == "Linux" ]]; then
     if [ -f "$LINUX_FLAG_FILE" ]; then
@@ -24,51 +200,8 @@ if [[ $(uname) == "Linux" ]]; then
     #thx alexia for this url thingy
     url=$(curl -s 'https://api.github.com/repos/palera1n/palera1n/releases' | jq --arg uname "$(uname -m)" -r '.[0].assets[] | select(.name == "palera1n-linux-\($uname)") | .browser_download_url')
     sudo curl -L -k "$url" -o /usr/bin/palera1n
-    PS3='Please enter your choice: '
-    echo "Please note that the palera1n team or me is not liable for any damage you may cause to your device, use at your own risk, you should take a backup of the device before jailbreaking"
-    options=("Setup FakeFS" "Rootful" "Setup BindFS" "BindFS" "Rootless" "Safe Mode" "DFU Helper" "Enter Recovery Mode" "Exit Recovery Mode" "Quit")
-    select opt in "${options[@]}"
-    do
-        case $opt in
-            "Setup FakeFS")
-                /usr/bin/palera1n -f -c -V
-                ;;
-            "Rootful")
-                /usr/bin/palera1n -f -V
-                ;;    
-            "Setup BindFS")
-                /usr/bin/palera1n -B -f -V
-                ;;
-            "BindFS")
-                /usr/bin/palera1n -B -V
-                ;;
-            "Rootless")
-                /usr/bin/palera1n -V
-                ;;
-            "Safe Mode")
-                /usr/bin/palera1n -s -V
-                ;;
-            "DFU Helper") 
-                /usr/bin/palera1n -D 
-                ;;
-            "Enter Recovery Mode")
-                /usr/bin/palera1n -E
-                ;;
-            "Exit Recovery Mode")
-               /usr/bin/palera1n -n
-               ;;
-            "Restore RootFS (Rootful)")
-               /usr/bin/palera1n --force-revert -f
-               ;;
-            "Restore RootFS (Rootless)")
-               /usr/bin/palera1n --force-revert
-               ;;     
-            "Quit")
-                exit
-                ;;
-            *) echo "invalid option $REPLY";;
-        esac
-    done
+    #call main menu function
+    palera1n_main_menu_linux
 elif [[ $(uname) == "Darwin" ]]; then
     if [ -f "$FLAG_FILE" ]; then
         echo "Flag file found. Skipping code that should only run once."
@@ -87,59 +220,12 @@ elif [[ $(uname) == "Darwin" ]]; then
     echo "Downloading palera1n"        
     sudo curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n-macos-universal -o /usr/local/bin/palera1n
     sudo chmod +x /usr/local/bin/palera1n
-    PS3='Please enter your choice: '
-    echo "Please note that the palera1n team or me is not liable for any damage you may cause to your device, use at your own risk, you should take a backup of the device before jailbreaking"
-    options=("Setup FakeFS" "Rootful" "Setup BindFS" "BindFS" "Rootless" "Safe Mode" "Safe Mode (Rootful)" "DFU Helper" "Enter Recovery Mode" "Exit Recovery Mode" "Restore RootFS (Rootful)" "Restore RootFS (Rootless)" "Quit")
-    select opt in "${options[@]}"
-    do
-        case $opt in
-            "Setup FakeFS")
-                /usr/local/bin/palera1n -f -c -V
-                ;;
-            "Rootful")
-                /usr/local/bin/palera1n -f -V
-                ;;    
-            "Setup BindFS")
-                /usr/local/bin/palera1n -B -f -V
-                ;;
-            "BindFS")
-                /usr/local/bin/palera1n -V -f -B
-                ;;
-            "Rootless")
-                /usr/local/bin/palera1n -V
-                ;;
-            "Safe Mode")
-                /usr/local/bin/palera1n -s -V
-                ;;
-            "Safe Mode (Rootful)")
-                /usr/local/bin/palera1n -s -f   
-                ;;
-            "DFU Helper") 
-                /usr/local/bin/palera1n -D 
-                ;;
-            "Enter Recovery Mode")
-                /usr/local/bin/palera1n -E
-                ;;
-            "Exit Recovery Mode")
-               /usr/local/bin/palera1n -n
-               ;;
-            "Restore RootFS (Rootful)")
-               /usr/local/bin/palera1n --force-revert -f
-               ;;
-            "Restore RootFS (Rootless)")
-              /usr/local/bin/palera1n --force-revert
-              ;;
-            "Quit")
-                exit
-                ;;
-            *) echo "invalid option $REPLY";;
-        esac
-    done
+    palera1n_main_menu_macos
     else
     echo "Unknown Operation system, Exiting..."
     exit
     fi
-iOS Part
+#iOS Part
 if [[ $(dpkg --print-architecture) == "iphoneos-arm" ]]; then #This part is also taken from azaz, thank you!
     cd /var/mobile/Documents
     curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n_2.0.0-beta.6_$(dpkg --print-architecture) -o palera1n.deb
