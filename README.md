@@ -7,6 +7,8 @@ just run this oneliner in your terminal!
 
 PS: do NOT use the script on [my cdn](https://cdn.planks.ml/scripts) because it is BROKEN and very OLD
 
+PS 2.0: macscript, macscript-gui is currently in beta! expect issues!
+
 GUI and macn1x (iso version of my script) coming very soon!
 # Features
 
