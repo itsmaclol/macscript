@@ -24,6 +24,6 @@ Credits:
 
 Azaz for the fix for APT on macOS and for the iPhone palera1n installation part
 
-Jan for helping me with some bash code and GUI (coming s0n)
+Jan for helping me with some bash code and GUI
 
 Me, for.. you know, basically everything
