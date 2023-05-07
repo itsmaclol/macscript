@@ -330,7 +330,7 @@ function checkra1n {
                 ;;
         esac
     fi
-    if [ "$version" - ge 20 ]; then
+    if [ "$version" -ge 20 ]; then
         sudo hdiutil detatch /Volumes/checkra1n\ beta\ 0.12.4
     else
         sudo hdiutil detach /Volumes/checkra1n\ beta\ 0.12.4\ 1/
