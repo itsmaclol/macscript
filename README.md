@@ -9,7 +9,9 @@ PS: do NOT use the script on [my cdn](https://cdn.planks.ml/scripts) because it 
 
 PS 2.0: macscript, macscript-gui is currently in beta! expect issues!
 
-GUI and macn1x (iso version of my script) coming very soon!
+macn1x (iso version of my script) coming very soon!
+Check out the (discord)[https://discord.gg/4nAfQthY6h]
+and the (GUI)[https://github.com/itsmaclol/macscript-gui]
 # Features
 
 Easy installation of palera1n on your devices (Linux, macOS)
