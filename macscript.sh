@@ -383,7 +383,7 @@ function odysseyra1n {
         if ! command -v brew &> /dev/null
     then
         echo "brew not found, installing..."
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/coolstar/Odyssey-bootstrap/5d17ff3e590cb0efe400c2753a7e4dd3372a1381/procursus-deploy-linux-macos.sh)"
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     else
         echo "brew is already installed, continuing..."
     fi
