@@ -12,7 +12,6 @@ PS 2.0: macscript, macscript-gui is currently in beta! expect issues!
 macn1x (iso version of my script) coming very soon!
 
 Check out the [discord](https://discord.gg/4nAfQthY6h)
-
 and the [GUI](https://github.com/itsmaclol/macscript-gui)
 
 # Features
