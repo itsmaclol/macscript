@@ -1,11 +1,9 @@
-<h1 align="left">MacScript</h1>
+<h1 align="left">macscript</h1>
 <h3 align="left">General script for installing palera1n/checkra1n and bootstrapping Procursus/APT on macOS.</h3>
 
----
+## Installation
 
-macscript is a script which makes installing palera1n,checkra1n,odysseyra1n and installing apt on macos easy!
-
-just run this oneliner in your terminal!
+Just run the following in your terminal:
 
 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsmaclol/macscript/main/macscript.sh)"`
 
@@ -18,21 +16,19 @@ macn1x (iso version of my script) coming very soon!
 Check out the [discord](https://discord.gg/4nAfQthY6h)
 and the [GUI](https://github.com/itsmaclol/macscript-gui)
 
-# Features
+## Features
+Easy installation of palera1n/odysseyra1n/checkra1n (MacOS and Linux)
 
-Easy installation of palera1n on your devices (Linux, macOS)
+Installation of APT and Bootstrap on MacOS (Big Sur and above)
 
-Easy installation of checkra1n on your devices (Linux, macOS)
+[seprmvr64[(github.com/mineek/seprmvr64) coming soon, (mabye)
 
-Easy installation of odysseyra1n on your devices (Linux, macOS)
-
-Easy installation of APT on macOS Big Sur and higher
-
-Credits: 
-
+## Credits
 Azaz for the fix for APT on macOS and for the iPhone palera1n installation part
 
 Jan for helping me with some bash code and GUI
+
+May, for helping make the README.MD *pretty*
 
 Me, for.. you know, basically everything
 
