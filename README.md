@@ -3,6 +3,10 @@
 
 <h3 align="left">General script for installing palera1n/checkra1n and bootstrapping Procursus/APT on macOS.</h3>
 
+Me or any one of the people in credits, are NOT responsible for any damage you may cause to your device and we are NOT liable.
+
+Backups are reccomended, continue at your own risk.
+
 ## Installation
 
 Just run the following in your terminal:
