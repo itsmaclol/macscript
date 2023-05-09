@@ -1,3 +1,6 @@
+
+
+
 <h1 align="left">macscript</h1>
 <h3 align="left">General script for installing palera1n/checkra1n and bootstrapping Procursus/APT on macOS.</h3>
 
