@@ -6,181 +6,247 @@ LINUX_FLAG_FILE=~/Documents/updates_and_dependencies_have_been_installed_DO_NOT_
 if [[ $(uname) == "Darwin" ]]; then
     macos_version=$(uname -r)
 fi
-#palera1n function
 submenu_rootful_linux() {
-    PS3="Select an option: "
-    options=("Setup FakeFS" "Setup BindFS" "Boot" "Enter Recovery Mode" "Exit Recovery Mode" "Safe Mode" "Restore RootFS" "DFU Helper" "Back")
-    select opt in "${options[@]}"
-    do
-        case $opt in
-            "Setup FakeFS")
-                /usr/bin/palera1n -c -f -V
-                ;;
-            "Setup BindFS")
-                /usr/bin/palera1n -f -V -B
-                ;;
-            "Boot")
-                /usr/bin/palera1n -f -V  
-                ;;
-            "Enter Recovery Mode")
-                /usr/bin/palera1n -E
-                ;;
-            "Exit Recovery Mode")
-                /usr/bin/palera1n -n
-                ;;
-            "Safe Mode")
-                /usr/bin/palera1n -s
-                ;;
-            "Restore RootFS")
-                /usr/bin/palera1n --force-revert -V -f
-                ;;
-            "DFU Helper")
-                /usr/bin/palera1n -D -f -V
-                ;;
-            "Back")
-                palera1n_main_menu_linux
-                ;;
-            *) echo "Invalid option $REPLY";;
-        esac
-    done
+    echo "┌───┬────────────────────────────────┐"
+    printf "│ %-2s│ %-30s │\n" "1" "Setup FakeFS"
+    printf "│ %-2s│ %-30s │\n" "2" "Setup BindFS"
+    printf "│ %-2s│ %-30s │\n" "3" "Boot"
+    printf "│ %-2s│ %-30s │\n" "4" "Enter Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "5" "Exit Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "6" "Safe Mode"
+    printf "│ %-2s│ %-30s │\n" "7" "Restore RootFS"
+    printf "│ %-2s│ %-30s │\n" "8" "DFU Helper"
+    printf "│ %-2s│ %-30s │\n" "9" "Back"
+    printf "│ %-2s│ %-30s │\n" "10" "Exit"
+    echo "└───┴────────────────────────────────┘"
+    read -p "Enter the number of the option you want to select: " selection
+    case $selection in
+        1)
+            /usr/bin/palera1n -c -f -V
+            ;;
+        2)
+            /usr/bin/palera1n -f -V -B
+            ;;
+        3)
+            /usr/bin/palera1n -f -V 
+            ;;
+        4)
+            /usr/bin/palera1n -E
+            ;;
+        5)
+            /usr/bin/palera1n -n
+            ;;
+        6)
+            /usr/bin/palera1n -s -V -f 
+            ;;
+        7)
+            /usr/bin/palera1n --force-revert -V -f
+            ;;
+        8)
+            /usr/bin/palera1n -D -f -V
+            ;;
+        9)
+            palera1n_main_menu_linux
+            ;;
+        10)
+            exit
+            ;;
+        *)
+            echo "Invalid selection"
+            ;;
+    esac
 }
 
 submenu_rootless_linux() {
-    PS3="Select an option: "
-    options=("Boot" "Enter Recovery Mode" "Exit Recovery Mode" "DFU Helper" "Restore RootFS" "Back")
-    select opt in "${options[@]}"
-    do
-        case $opt in
-            "Boot")
-                /usr/bin/palera1n -l -V
-                ;;
-            "Enter Recovery Mode")
-                /usr/bin/palera1n -E
-                ;;
-            "Exit Recovery Mode")
-                /usr/bin/palera1n -n
-                ;;
-            "DFU Helper")
-                /usr/bin/palera1n -D -l -V
-                ;;
-            "Restore RootFS")
-                /usr/bin/palera1n --force-revert -V 
-                ;;
-            "Back")
-                palera1n_main_menu_linux
-                ;;
-            *) echo "Invalid option $REPLY";;
-        esac
-    done
+    echo "┌───┬────────────────────────────────┐"
+    printf "│ %-2s│ %-30s │\n" "1" "Boot"
+    printf "│ %-2s│ %-30s │\n" "2" "Enter Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "3" "Exit Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "4" "DFU Helper"
+    printf "│ %-2s│ %-30s │\n" "5" "Restore RootFS"
+    printf "│ %-2s│ %-30s │\n" "6" "Back"
+    echo "└───┴────────────────────────────────┘"
+    read -p "Enter the number of the option you want to select: " selection
+
+    # Check the user's selection and execute the appropriate command
+    case $selection in
+        1)
+            /usr/bin/palera1n -l -V
+            ;;
+        2)
+            /usr/bin/palera1n -E
+            ;;
+        3)
+            /usr/bin/palera1n -n
+            ;;
+        4)
+            /usr/bin/palera1n -D -l -V
+            ;;
+        5)
+            /usr/bin/palera1n --force-revert -V
+            ;;
+        6)
+            echo "Going back to previous menu..."
+            palera1n_main_menu_macos
+            ;;
+        *)
+            echo "Invalid selection"
+            ;;
+    esac
 }
 
 submenu_rootful_macos() {
-    PS3="Select an option: "
-    options=("Setup FakeFS" "Setup BindFS" "Boot" "Enter Recovery Mode" "Exit Recovery Mode" "Safe Mode" "Restore RootFS" "DFU Helper" "Back")
-    select opt in "${options[@]}"
-    do
-        case $opt in
-            "Setup FakeFS")
-                /usr/local/bin/palera1n -c -f -V
-                ;;
-            "Setup BindFS")
-                /usr/local/bin/palera1n -f -V -B
-                ;;
-            "Boot")
-                /usr/local/bin/palera1n -f -V  
-                ;;
-            "Enter Recovery Mode")
-                /usr/local/bin/palera1n -E
-                ;;
-            "Exit Recovery Mode")
-                /usr/local/bin/palera1n -n
-                ;;
-            "Safe Mode")
-                /usr/local/bin/palera1n -s
-                ;;
-            "Restore RootFS")
-                /usr/local/bin/palera1n --force-revert -V -f
-                ;;
-            "DFU Helper")
-                /usr/local/bin/palera1n -D -f -V
-                ;;
-            "Back")
-                palera1n_main_menu_macos
-                ;;
-            *) echo "Invalid option $REPLY";;
-        esac
-    done
+    echo "┌───┬────────────────────────────────┐"
+    printf "│ %-2s│ %-30s │\n" "1" "Setup FakeFS"
+    printf "│ %-2s│ %-30s │\n" "2" "Setup BindFS"
+    printf "│ %-2s│ %-30s │\n" "3" "Boot"
+    printf "│ %-2s│ %-30s │\n" "4" "Enter Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "5" "Exit Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "6" "Safe Mode"
+    printf "│ %-2s│ %-30s │\n" "7" "Restore RootFS"
+    printf "│ %-2s│ %-30s │\n" "8" "DFU Helper"
+    printf "│ %-2s│ %-30s │\n" "9" "Back"
+    printf "│ %-2s│ %-30s │\n" "10" "Exit"
+    echo "└───┴────────────────────────────────┘"
+    read -p "Enter the number of the option you want to select: " selection
+    case $selection in
+        1)
+            /usr/local/bin/palera1n -c -f -V
+            ;;
+        2)
+            /usr/local/bin/palera1n -f -V -B
+            ;;
+        3)
+            /usr/local/bin/palera1n -f -V 
+            ;;
+        4)
+            /usr/local/bin/palera1n -E
+            ;;
+        5)
+            /usr/local/bin/palera1n -n
+            ;;
+        6)
+            /usr/local/bin/palera1n -s -V -f 
+            ;;
+        7)
+            /usr/local/bin/palera1n --force-revert -V -f
+            ;;
+        8)
+            /usr/local/bin/palera1n -D -f -V
+            ;;
+        9)
+            palera1n_main_menu_macos
+            ;;
+        10)
+            exit
+            ;;
+        *)
+            echo "Invalid selection"
+            ;;
+    esac
 }
 
+
 submenu_rootless_macos() {
-    PS3="Select an option: "
-    options=("Boot" "Enter Recovery Mode" "Exit Recovery Mode" "DFU Helper" "Restore RootFS" "Back")
-    select opt in "${options[@]}"
-    do
-        case $opt in
-            "Boot")
-                /usr/local/bin/palera1n -l -V
-                ;;
-            "Enter Recovery Mode")
-                /usr/local/bin/palera1n -E
-                ;;
-            "Exit Recovery Mode")
-                /usr/local/bin/palera1n -n
-                ;;
-            "DFU Helper")
-                /usr/local/bin/palera1n -D -l -V
-                ;;
-            "Restore RootFS")
-                /usr/local/bin/palera1n --force-revert -V 
-                ;;
-            "Back")
-                palera1n_main_menu_macos
-                ;;
-            *) echo "Invalid option $REPLY";;
-        esac
-    done
+    echo "┌───┬────────────────────────────────┐"
+    printf "│ %-2s│ %-30s │\n" "1" "Boot"
+    printf "│ %-2s│ %-30s │\n" "2" "Enter Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "3" "Exit Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "4" "DFU Helper"
+    printf "│ %-2s│ %-30s │\n" "5" "Restore RootFS"
+    printf "│ %-2s│ %-30s │\n" "6" "Back"
+    echo "└───┴────────────────────────────────┘"
+    read -p "Enter the number of the option you want to select: " selection
+
+    # Check the user's selection and execute the appropriate command
+    case $selection in
+        1)
+            /usr/local/bin/palera1n -l -V
+            ;;
+        2)
+            /usr/local/bin/palera1n -E
+            ;;
+        3)
+            /usr/local/bin/palera1n -n
+            ;;
+        4)
+            /usr/local/bin/palera1n -D -l -V
+            ;;
+        5)
+            /usr/local/bin/palera1n --force-revert -V
+            ;;
+        6)
+            echo "Going back to previous menu..."
+            palera1n_main_menu_macos
+            ;;
+        *)
+            echo "Invalid selection"
+            ;;
+    esac
 }
 
 function palera1n_main_menu_linux {
-    PS3='Please enter your choice: '
-    echo "Please note that the palera1n team or me is not liable for any damage you may cause to your device, use at your own risk, you should take a backup of the device before jailbreaking"
-    options=("Rootless" "Rootful" "Quit")
-    select opt in "${options[@]}"
-    do
-        case $opt in
-            "Rootless")
-                submenu_rootless_linux
-                ;;
-            "Rootful")
-                submenu_rootful_linux
-                ;;        
-            "Quit")
-                exit
-                ;;
-            *) echo "invalid option $REPLY";;
-        esac
-    done
+    echo "Welcome to the palera1n submenu!"
+    echo "┌───┬────────────────────────────────┐"
+    printf "│ %-2s│ %-30s │\n" "1" "Rootful"
+    printf "│ %-2s│ %-30s │\n" "2" "Rootless"
+    printf "│ %-2s│ %-30s │\n" "3" "Back"
+    printf "│ %-2s│ %-30s │\n" "3" "Exit"
+    echo "└───┴────────────────────────────────┘"
+
+# Ask the user for input
+    read -p "Enter the number of what you want to do: " selection
+
+    # Check the user's selection and execute the appropriate command
+    case $selection in
+        1)
+            submenu_rootful_linux
+            ;;
+        2)
+            submenu_rootless_linux
+            ;;
+        3)
+            main_menu
+            ;;
+        4)
+            exit
+            ;;
+        *)
+            echo "Invalid selection"
+            ;;
+    esac
 }
 
 function palera1n_main_menu_macos {
-    PS3='Please enter your choice: '
-    echo "Please note that the palera1n team or me is not liable for any damage you may cause to your device, use at your own risk, you should take a backup of the device before jailbreaking"
-    options=("Rootless" "Rootful" "Quit")
-    select opt in "${options[@]}"
-    do
-        case $opt in
-            "Rootless")
-                submenu_rootless_macos
-                ;;
-            "Rootful")
-                submenu_rootful_macos
-                ;;        
-            "Quit")
-                exit
-                ;;
-            *) echo "invalid option $REPLY";;
-        esac
-    done
+    echo "Welcome to the palera1n submenu!"
+    echo "┌───┬────────────────────────────────┐"
+    printf "│ %-2s│ %-30s │\n" "1" "Rootful"
+    printf "│ %-2s│ %-30s │\n" "2" "Rootless"
+    printf "│ %-2s│ %-30s │\n" "3" "Back"
+    printf "│ %-2s│ %-30s │\n" "3" "Exit"
+    echo "└───┴────────────────────────────────┘"
+
+# Ask the user for input
+    read -p "Enter the number of what you want to do: " selection
+
+    # Check the user's selection and execute the appropriate command
+    case $selection in
+        1)
+            submenu_rootful_macos
+            ;;
+        2)
+            submenu_rootless_macos
+            ;;
+        3)
+            main_menu
+            ;;
+        4)
+            exit
+            ;;
+        *)
+            echo "Invalid selection"
+            ;;
+    esac
 }
 
 function palera1n {
@@ -279,7 +345,7 @@ function checkra1n {
               echo "In this next screen, you need to enable untested iOS versions if you are on an iOS version higher than 14.5.1"
               while [[ ! "$choice" =~ ^[yYnN]$ ]]
           do
-              read -p "Do you want to continue? (Y/n) " choice
+              read -r -p "Do you want to continue? (Y/n) " choice
           done
               # Handle user input
           case "$choice" in
@@ -305,12 +371,12 @@ function checkra1n {
         echo "In this next screen, you need to enable untested iOS versions if you are on an iOS version higher than 14.5.1"
         echo "Please note that the checkra1n team or me is not viable for any damage you might cause to your device"
         version=$(uname -r | cut -d '.' -f 1)
-        read -p "Do you want to continue? (y/n) " choice
+        read -r -p "Do you want to continue? (y/n) " choice
 
         # Loop to handle invalid input
         while [[ ! "$choice" =~ ^[yYnN]$ ]]
         do
-            read -p "Please enter y or n: " choice
+            read -r -p "Please enter y or n: " choice
         done
 
             # Handle user input
@@ -340,7 +406,7 @@ function checkra1n {
 #procurusussusuusussusuus installation on macos
 function apt-procursus {
         if [[ $(uname) == "Darwin" ]]; then
-            read -p "Do you want to bootstrap procursus and install apt? (y/n)" awnser
+            read -r -p "Do you want to bootstrap procursus and install apt? (y/n)" awnser
         if [[ $awnser =~ ^[yY]$ ]]; then
             echo "Bootstrapping procursus and installing apt, please wait..."
         if [[ $(uname -m) == "arm64" ]]; then
@@ -393,7 +459,7 @@ function odysseyra1n {
      echo "For odysseyra1n to work, you must NOT have opened the checkra1n app after jailbreaking, if you have done so, restore rootFS and try again"
               while [[ ! "$choice" =~ ^[yYnN]$ ]]
           do
-              read -p "Do you want to continue? (Y/n) " choice
+              read -r -p "Do you want to continue? (Y/n) " choice
           done
               # Handle user input
           case "$choice" in
@@ -427,74 +493,57 @@ function odysseyra1n {
 }
 
 
-if [[ "${macos_version}" == *"19."* || "${macos_version}" == *"20."* || "${macos_version}" == *"21."* || "${macos_version}" == *"22."* ]]; then
-    echo "Pick what you want to do"
-    PS3='Please enter your choice: '
-    options=("palera1n" "checkra1n" "odysseyra1n" "Install APT and bootstrap Procursus" "Quit")
-    select opt in "${options[@]}"
-    do
-        case $opt in
-            "palera1n")
-                palera1n
-                ;;
-            "checkra1n")
-                checkra1n
-                ;;
-            "odysseyra1n")
-                odysseyra1n
-                ;;
-            "Install APT and bootstrap Procursus")
-                apt-procursus    
-                ;;
-            "Quit")
-                exit
-                ;;
-            *) echo "Invalid option";;
-    esac
-done
-elif [[ $(uname) == "Darwin" ]]; then # this is extra i know dont bother me about it on discord, it still works
-    echo "Pick what you want to do"
-    PS3='Please enter your choice: '
-    options=("palera1n" "checkra1n" "odysseyra1n" "Quit")
-    select opt in "${options[@]}"
-    do
-        case $opt in
-            "palera1n")
-                palera1n
-                ;;
-            "checkra1n")
-                checkra1n
-                ;;
-            "odysseyra1n")
-                odysseyra1n
-                ;;
-            "Quit")
-                exit
-                ;;
-            *) echo "Invalid option";;
-    esac
-done
-else
-# Main menu
-echo "Pick what you want to do"
-PS3='Please enter your choice: '
-options=("palera1n" "checkra1n" "odysseyra1n" "Quit")
-select opt in "${options[@]}"
-do
-    case $opt in
-        "palera1n")
-            palera1n
-            ;;
-        "checkra1n")
+function main_menu {
+    echo "Welcome to macscript!"
+    echo "┌───┬────────────────────────────────┐"
+    printf "│ %-2s│ %-30s │\n" "1" "Install checkra1n"
+    printf "│ %-2s│ %-30s │\n" "2" "Run the odysseyra1n Script"
+    printf "│ %-2s│ %-30s │\n" "3" "Install palera1n"
+    if [ "${macos_version:0:2}" == "20" ] || [ "${macos_version:0:2}" == "22" ]; then
+        printf "│ %-2s│ %-30s │\n" "4" "Install Procursus (macOS only)"
+    fi
+    printf "│ %-2s│ %-30s │\n" "5" "SSH Over USB"
+    printf "│ %-2s│ %-30s │\n" "6" "PongoOS Shell"
+    printf "│ %-2s│ %-30s │\n" "7" "Exit"
+    echo "└───┴────────────────────────────────┘"
+
+    # Ask the user for input
+    read -p "Enter the number of what you want to do: " selection
+
+    # Check the user's selection and execute the appropriate command
+    case $selection in
+        1)
             checkra1n
             ;;
-        "odysseyra1n")
+        2)
             odysseyra1n
             ;;
-        "Quit")
-            break
+        3)
+            palera1n
             ;;
-        *) echo "Invalid option";;
+        4)
+            if [ "${macos_version:0:2}" == "22" ] || [ "${macos_version:0:2}" == "21" ]; then
+                apt-procursus
+            else
+                echo "Not supported, exiting..."
+                exit
+            fi
+            ;;
+        5)
+            echo "Not implemented, exiting..."
+            exit
+            ;;
+        6)
+            echo "Not implemented, exiting..."
+            exit
+            ;;
+        7)
+            echo "Exiting..."
+            exit
+            ;;
+        *)
+            echo "Invalid selection"
+            ;;
     esac
-done
-fi
+}
+main_menu
