@@ -21,7 +21,7 @@ Easy installation of palera1n/odysseyra1n/checkra1n (MacOS and Linux)
 
 Installation of APT and Bootstrap on MacOS (Big Sur and above)
 
-[seprmvr64[(github.com/mineek/seprmvr64) coming soon, (mabye)
+[seprmvr64](github.com/mineek/seprmvr64) coming soon, (mabye)
 
 ## Credits
 Azaz for the fix for APT on macOS and for the iPhone palera1n installation part
