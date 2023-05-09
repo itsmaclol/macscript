@@ -1,7 +1,6 @@
 
 ![download-3-removebg-preview](https://github.com/itsmaclol/macscript/assets/130684812/0693d09a-ad9f-48a4-b805-18d2396aa8ac)
 
-<h1 align="left">macscript</h1>
 <h3 align="left">General script for installing palera1n/checkra1n and bootstrapping Procursus/APT on macOS.</h3>
 
 ## Installation
