@@ -6,7 +6,7 @@ LINUX_FLAG_FILE=~/Documents/updates_and_dependencies_have_been_installed_DO_NOT_
 if [[ $(uname) == "Darwin" ]]; then
     macos_version=$(uname -r)
 fi
-submenu_rootful_linux() {
+submenu_rootful() {
     echo "┌───┬────────────────────────────────┐"
     printf "│ %-2s│ %-30s │\n" "1" "Setup FakeFS"
     printf "│ %-2s│ %-30s │\n" "2" "Setup BindFS"
@@ -19,123 +19,66 @@ submenu_rootful_linux() {
     printf "│ %-2s│ %-30s │\n" "9" "Back"
     printf "│ %-2s│ %-30s │\n" "10" "Exit"
     echo "└───┴────────────────────────────────┘"
-    read -p "Enter the number of the option you want to select: " selection
+    read -r -p "Enter the number of the option you want to select: " selection
     case $selection in
         1)
-            /usr/bin/palera1n -c -f -V
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n -c -f -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n -c -f -V
+            fi
             ;;
         2)
-            /usr/bin/palera1n -f -V -B
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n -f -V -B
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n -f -V -B
+            fi
             ;;
         3)
-            /usr/bin/palera1n -f -V 
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n -f -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n -f -V
+            fi
             ;;
         4)
-            /usr/bin/palera1n -E
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n -E
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n -E
+            fi
             ;;
         5)
-            /usr/bin/palera1n -n
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n -n
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n -n
+            fi
             ;;
         6)
-            /usr/bin/palera1n -s -V -f 
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n -s -V -f
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n -s -V -f
+            fi 
             ;;
         7)
-            /usr/bin/palera1n --force-revert -V -f
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n --force-revert -f -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n --force-revert -f -V
+            fi
             ;;
         8)
-            /usr/bin/palera1n -D -f -V
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n -D -f -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n -D -f -V
+            fi
             ;;
         9)
-            palera1n_main_menu_linux
-            ;;
-        10)
-            exit
-            ;;
-        *)
-            echo "Invalid selection"
-            ;;
-    esac
-}
-
-submenu_rootless_linux() {
-    echo "┌───┬────────────────────────────────┐"
-    printf "│ %-2s│ %-30s │\n" "1" "Boot"
-    printf "│ %-2s│ %-30s │\n" "2" "Enter Recovery Mode"
-    printf "│ %-2s│ %-30s │\n" "3" "Exit Recovery Mode"
-    printf "│ %-2s│ %-30s │\n" "4" "DFU Helper"
-    printf "│ %-2s│ %-30s │\n" "5" "Restore RootFS"
-    printf "│ %-2s│ %-30s │\n" "6" "Back"
-    echo "└───┴────────────────────────────────┘"
-    read -p "Enter the number of the option you want to select: " selection
-
-    # Check the user's selection and execute the appropriate command
-    case $selection in
-        1)
-            /usr/bin/palera1n -l -V
-            ;;
-        2)
-            /usr/bin/palera1n -E
-            ;;
-        3)
-            /usr/bin/palera1n -n
-            ;;
-        4)
-            /usr/bin/palera1n -D -l -V
-            ;;
-        5)
-            /usr/bin/palera1n --force-revert -V
-            ;;
-        6)
-            echo "Going back to previous menu..."
-            palera1n_main_menu_macos
-            ;;
-        *)
-            echo "Invalid selection"
-            ;;
-    esac
-}
-
-submenu_rootful_macos() {
-    echo "┌───┬────────────────────────────────┐"
-    printf "│ %-2s│ %-30s │\n" "1" "Setup FakeFS"
-    printf "│ %-2s│ %-30s │\n" "2" "Setup BindFS"
-    printf "│ %-2s│ %-30s │\n" "3" "Boot"
-    printf "│ %-2s│ %-30s │\n" "4" "Enter Recovery Mode"
-    printf "│ %-2s│ %-30s │\n" "5" "Exit Recovery Mode"
-    printf "│ %-2s│ %-30s │\n" "6" "Safe Mode"
-    printf "│ %-2s│ %-30s │\n" "7" "Restore RootFS"
-    printf "│ %-2s│ %-30s │\n" "8" "DFU Helper"
-    printf "│ %-2s│ %-30s │\n" "9" "Back"
-    printf "│ %-2s│ %-30s │\n" "10" "Exit"
-    echo "└───┴────────────────────────────────┘"
-    read -p "Enter the number of the option you want to select: " selection
-    case $selection in
-        1)
-            /usr/local/bin/palera1n -c -f -V
-            ;;
-        2)
-            /usr/local/bin/palera1n -f -V -B
-            ;;
-        3)
-            /usr/local/bin/palera1n -f -V 
-            ;;
-        4)
-            /usr/local/bin/palera1n -E
-            ;;
-        5)
-            /usr/local/bin/palera1n -n
-            ;;
-        6)
-            /usr/local/bin/palera1n -s -V -f 
-            ;;
-        7)
-            /usr/local/bin/palera1n --force-revert -V -f
-            ;;
-        8)
-            /usr/local/bin/palera1n -D -f -V
-            ;;
-        9)
-            palera1n_main_menu_macos
+            palera1n_main_menu
             ;;
         10)
             exit
@@ -147,7 +90,7 @@ submenu_rootful_macos() {
 }
 
 
-submenu_rootless_macos() {
+submenu_rootless() {
     echo "┌───┬────────────────────────────────┐"
     printf "│ %-2s│ %-30s │\n" "1" "Boot"
     printf "│ %-2s│ %-30s │\n" "2" "Enter Recovery Mode"
@@ -155,29 +98,68 @@ submenu_rootless_macos() {
     printf "│ %-2s│ %-30s │\n" "4" "DFU Helper"
     printf "│ %-2s│ %-30s │\n" "5" "Restore RootFS"
     printf "│ %-2s│ %-30s │\n" "6" "Back"
+    printf "│ %-2s│ %-30s │\n" "7" "Exit"
     echo "└───┴────────────────────────────────┘"
-    read -p "Enter the number of the option you want to select: " selection
+    read -r -p "Enter the number of the option you want to select: " selection
 
     # Check the user's selection and execute the appropriate command
     case $selection in
         1)
-            /usr/local/bin/palera1n -l -V
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n -l -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n -l -V
+            else
+                echo "Not supported, exiting..."
+                exit
+            fi
             ;;
         2)
-            /usr/local/bin/palera1n -E
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n -E
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n -E
+            else
+                echo "Not supported, exiting..."
+                exit
+            fi
             ;;
         3)
-            /usr/local/bin/palera1n -n
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n -n
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n -n
+            else
+                echo "Not supported, exiting..."
+                exit
+            fi
             ;;
         4)
-            /usr/local/bin/palera1n -D -l -V
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n -D -l -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n -D -l -V
+            else
+                echo "Not supported, exiting..."
+                exit
+            fi
             ;;
         5)
-            /usr/local/bin/palera1n --force-revert -V
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n --force-revert -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n --force-revert -V
+            else
+                echo "Not supported, exiting..."
+                exit
+            fi
             ;;
         6)
             echo "Going back to previous menu..."
-            palera1n_main_menu_macos
+            palera1n_main_menu
+            ;;
+        7)
+            exit
             ;;
         *)
             echo "Invalid selection"
@@ -185,25 +167,25 @@ submenu_rootless_macos() {
     esac
 }
 
-function palera1n_main_menu_linux {
+function palera1n_main_menu {
     echo "Welcome to the palera1n submenu!"
     echo "┌───┬────────────────────────────────┐"
     printf "│ %-2s│ %-30s │\n" "1" "Rootful"
     printf "│ %-2s│ %-30s │\n" "2" "Rootless"
     printf "│ %-2s│ %-30s │\n" "3" "Back"
-    printf "│ %-2s│ %-30s │\n" "3" "Exit"
+    printf "│ %-2s│ %-30s │\n" "4" "Exit"
     echo "└───┴────────────────────────────────┘"
 
 # Ask the user for input
-    read -p "Enter the number of what you want to do: " selection
+    read -r -p "Enter the number of what you want to do: " selection
 
     # Check the user's selection and execute the appropriate command
     case $selection in
         1)
-            submenu_rootful_linux
+            submenu_rootful
             ;;
         2)
-            submenu_rootless_linux
+            submenu_rootless
             ;;
         3)
             main_menu
@@ -217,37 +199,6 @@ function palera1n_main_menu_linux {
     esac
 }
 
-function palera1n_main_menu_macos {
-    echo "Welcome to the palera1n submenu!"
-    echo "┌───┬────────────────────────────────┐"
-    printf "│ %-2s│ %-30s │\n" "1" "Rootful"
-    printf "│ %-2s│ %-30s │\n" "2" "Rootless"
-    printf "│ %-2s│ %-30s │\n" "3" "Back"
-    printf "│ %-2s│ %-30s │\n" "3" "Exit"
-    echo "└───┴────────────────────────────────┘"
-
-# Ask the user for input
-    read -p "Enter the number of what you want to do: " selection
-
-    # Check the user's selection and execute the appropriate command
-    case $selection in
-        1)
-            submenu_rootful_macos
-            ;;
-        2)
-            submenu_rootless_macos
-            ;;
-        3)
-            main_menu
-            ;;
-        4)
-            exit
-            ;;
-        *)
-            echo "Invalid selection"
-            ;;
-    esac
-}
 
 function palera1n {
 if [[ $(uname) == "Linux" ]]; then
@@ -277,7 +228,7 @@ if [[ $(uname) == "Linux" ]]; then
     url=$(curl -s 'https://api.github.com/repos/palera1n/palera1n/releases' | jq --arg uname "$(uname -m)" -r '.[0].assets[] | select(.name == "palera1n-linux-\($uname)") | .browser_download_url')
     sudo curl -L -k "$url" -o /usr/bin/palera1n
     #call main menu function
-    palera1n_main_menu_linux
+    palera1n_main_menu
 elif [[ $(uname) == "Darwin" ]]; then
     if [ -f "$FLAG_FILE" ]; then
         echo "Flag file found. Skipping code that should only run once."
@@ -296,7 +247,7 @@ elif [[ $(uname) == "Darwin" ]]; then
     echo "Downloading palera1n"        
     sudo curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n-macos-universal -o /usr/local/bin/palera1n
     sudo chmod +x /usr/local/bin/palera1n
-    palera1n_main_menu_macos
+    palera1n_main_menu
     else
     echo "Unknown Operation system, Exiting..."
     exit
@@ -502,9 +453,7 @@ function main_menu {
     if [ "${macos_version:0:2}" == "20" ] || [ "${macos_version:0:2}" == "22" ]; then
         printf "│ %-2s│ %-30s │\n" "4" "Install Procursus (macOS only)"
     fi
-    printf "│ %-2s│ %-30s │\n" "5" "SSH Over USB"
-    printf "│ %-2s│ %-30s │\n" "6" "PongoOS Shell"
-    printf "│ %-2s│ %-30s │\n" "7" "Exit"
+    printf "│ %-2s│ %-30s │\n" "5" "Exit"
     echo "└───┴────────────────────────────────┘"
 
     # Ask the user for input
@@ -522,7 +471,7 @@ function main_menu {
             palera1n
             ;;
         4)
-            if [ "${macos_version:0:2}" == "22" ] || [ "${macos_version:0:2}" == "21" ]; then
+            if [ "${macos_version:0:2}" == "20" ] || [ "${macos_version:0:2}" == "21" ] || [ "${macos_version:0:2}" == "22" ]; then
                 apt-procursus
             else
                 echo "Not supported, exiting..."
@@ -530,14 +479,6 @@ function main_menu {
             fi
             ;;
         5)
-            echo "Not implemented, exiting..."
-            exit
-            ;;
-        6)
-            echo "Not implemented, exiting..."
-            exit
-            ;;
-        7)
             echo "Exiting..."
             exit
             ;;
