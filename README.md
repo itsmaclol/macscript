@@ -36,6 +36,8 @@ Jan for helping me with some bash code and GUI
 
 May, for helping make the README.MD *pretty*
 
+Alexia, for helping me with some bash code
+
 Me, for.. you know, basically everything
 
 Made with <3 by Mac
