@@ -1,4 +1,8 @@
-# macscript
+<h1 align="left">MacScript</h1>
+<h3 align="left">General script for installing palera1n/checkra1n and bootstrapping Procursus/APT on macOS.</h3>
+
+---
+
 macscript is a script which makes installing palera1n,checkra1n,odysseyra1n and installing apt on macos easy!
 
 just run this oneliner in your terminal!
