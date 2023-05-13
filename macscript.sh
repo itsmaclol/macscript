@@ -347,12 +347,12 @@ function checkra1n {
                 ;;
         esac
     fi
-    if [ "$version" -ge 20 ]; then
-        sudo hdiutil detatch /Volumes/checkra1n\ beta\ 0.12.4
-    else
-        sudo hdiutil detach /Volumes/checkra1n\ beta\ 0.12.4\ 1/
-    fi
-    sudo rm -rf /usr/local/bin/checkra1n.dmg 
+        if [ "$version" -ge 20 ]; then
+            sudo hdiutil detatch /Volumes/checkra1n\ beta\ 0.12.4
+        else
+            sudo hdiutil detach /Volumes/checkra1n\ beta\ 0.12.4\ 1/
+        fi
+        sudo rm -rf /usr/local/bin/checkra1n.dmg 
 }
 #procurusussusuusussusuus installation on macos
 function apt-procursus {
