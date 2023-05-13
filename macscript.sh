@@ -453,7 +453,10 @@ function main_menu {
     if [ "${macos_version:0:2}" == "20" ] || [ "${macos_version:0:2}" == "22" ]; then
         printf "│ %-2s│ %-30s │\n" "4" "Install Procursus (macOS only)"
     fi
-    printf "│ %-2s│ %-30s │\n" "5" "Exit"
+    if [ "${macos_version:0:2}" == "20 ] || [ "${macos_version:0:2" == 22 ]; then
+        printf "│ %-2s│ %-30s │\n" "5" "Exit"
+    else
+        printf "| %-2s| %-30s |/n" "4" "Exit"
     echo "└───┴────────────────────────────────┘"
 
     # Ask the user for input
