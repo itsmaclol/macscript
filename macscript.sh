@@ -457,6 +457,7 @@ function main_menu {
         printf "│ %-2s│ %-30s │\n" "5" "Exit"
     else
         printf "│ %-2s│ %-30s │\n" "4" "Exit"
+    fi
     echo "└───┴────────────────────────────────┘"
 
     # Ask the user for input
