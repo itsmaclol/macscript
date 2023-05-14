@@ -38,4 +38,4 @@ Alexia, for helping me with some bash.
 
 Me, for.. you know, basically everything.
 
-Made with <3 by Mac.
+Made with <3 by Mac
