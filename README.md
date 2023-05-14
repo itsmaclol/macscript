@@ -1,43 +1,41 @@
-
 ![download-3-removebg-preview](https://github.com/itsmaclol/macscript/assets/130684812/0693d09a-ad9f-48a4-b805-18d2396aa8ac)
 
-<h3 align="left">General script for installing palera1n/checkra1n and bootstrapping Procursus/APT on macOS.</h3>
+<h3 align="left">General script for installing palera1n/checkra1n and bootstrapping with Procursus on macOS systems.</h3>
 
-Me or any one of the people in credits, are NOT responsible for any damage you may cause to your device and we are NOT liable.
+This product is hereby licensed under the MIT license. It can be viewed [here](https://github.com/itsmaclol/macscript/blob/main/LICENSE).
 
-Backups are reccomended, continue at your own risk.
+Backups are recommended, continue at your own risk.
 
 ## Installation
 
 Just run the following in your terminal:
+`curl -Lsk https://raw.githubusercontent.com/itsmaclol/macscript/main/macscript.sh | bash`
 
-`/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsmaclol/macscript/main/macscript.sh)"`
+PS: Do NOT use the script on [my cdn](https://cdn.planks.ml/scripts) because it is broken and very old.
 
-PS: do NOT use the script on [my cdn](https://cdn.planks.ml/scripts) because it is BROKEN and very OLD
+PS 2.0: macscript-gui is currently in beta. Expect issues.
 
-PS 2.0: macscript, macscript-gui is currently in beta! expect issues!
+macn1x (bootable Linux distro for macscript) is coming soon.
 
-macn1x (iso version of my script) coming very soon!
-
-Check out the [discord](https://discord.gg/4nAfQthY6h)
+Check out the [Discord](https://discord.gg/4nAfQthY6h)
 and the [GUI](https://github.com/itsmaclol/macscript-gui)
 
 ## Features
-Easy installation of palera1n/odysseyra1n/checkra1n (MacOS and Linux)
+Easy installation of palera1n/odysseyra1n/checkra1n (macOS and Linux).
 
-Installation of APT and Bootstrap on MacOS (Big Sur and above)
+Installation of the Procursus bootstrap on macOS (Big Sur and above).
 
-[seprmvr64](https://github.com/mineek/seprmvr64) support coming soon, (mabye)
+[seprmvr64](https://github.com/mineek/seprmvr64) support coming soon, (maybe).
 
 ## Credits
-Azaz for the fix for APT on macOS and for the iPhone palera1n installation part
+genesis. for the fix for Procursus on macOS and for the iOS palera1n installation part.
 
-Jan for helping me with some bash code and GUI
+Jan for helping me with some bash code and the GUI.
 
-May, for helping make the README.MD *pretty*
+May, for helping make the README.md *pretty*.
 
-Alexia, for helping me with some bash code
+Alexia, for helping me with some bash.
 
-Me, for.. you know, basically everything
+Me, for.. you know, basically everything.
 
-Made with <3 by Mac
+Made with <3 by Mac.
