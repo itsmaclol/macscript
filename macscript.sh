@@ -253,21 +253,18 @@ elif [[ $(uname) == "Darwin" ]]; then
     exit
     fi
 #iOS Part
-if [[ $(dpkg --print-architecture) == "iphoneos-arm" ]]; then #This part is also taken from azaz, thank you!
-    cd /var/mobile/Documents
-    curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n_2.0.0-beta.6_$(dpkg --print-architecture) -o palera1n.deb
-    echo "This may ask for your password, the default password is alpine unless you changed it"
-    sudo dpkg -i palera1n.deb
-    rm palera1n.deb
+if [[ $(dpkg --print-architecture) == "iphoneos-arm" ]]; then
+     rm /usr/local/bin/palera1n
+     cd /var/mobile/Documents/
+     curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n_2.0.0-beta.6_iphoneos-arm.deb -o palera1n.deb
+     sudo dpkg -i palera1n.deb
+     rm palera1n.deb
 elif [[ $(dpkg --print-architecture) == "iphoneos-arm64" ]]; then
-    cd /var/mobile/Documents
-    curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n_2.0.0-beta.6_$(dpkg --print-architecture) -o palera1n.deb
-    echo "This may ask for your password, the default password is alpine unless you changed it"
-    sudo dpkg -i palera1n.deb
-    rm palera1n.deb
-else
- echo "The current operating system has been detected as not being iOS, continuing..."
-fi
+     rm /usr/local/bin/palera1n
+     cd /var/mobile/Documents/
+     curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n_2.0.0-beta.6_iphoneos-arm64.deb -o palera1n.deb
+     sudo dpkg -i palera1n.deb
+     rm palera1n.deb
 }
 
 # Function to display checkra1n 
