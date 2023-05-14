@@ -13,7 +13,7 @@ Just run the following in your terminal:
 
 PS: Do NOT use the script on [my cdn](https://cdn.planks.ml/scripts) because it is broken and very old.
 
-PS 2.0: macscript-gui is currently in beta. Expect issues.
+PS 2.0: macscript, macscript-gui is currently in beta. Expect issues.
 
 macn1x (bootable Linux distro for macscript) is coming soon.
 
