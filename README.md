@@ -25,7 +25,7 @@ Easy installation of palera1n/odysseyra1n/checkra1n (macOS and Linux).
 
 Installation of the Procursus bootstrap on macOS (Big Sur and above).
 
-[seprmvr64](https://github.com/mineek/seprmvr64) support coming soon, (maybe).
+[seprmvr64](https://github.com/mineek/seprmvr64) support coming soon, (maybe)
 
 ## Credits
 genesis. for the fix for Procursus on macOS and for the iOS palera1n installation part.
