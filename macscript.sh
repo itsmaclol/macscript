@@ -265,6 +265,7 @@ elif [[ $(dpkg --print-architecture) == "iphoneos-arm64" ]]; then
      curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n_2.0.0-beta.6_iphoneos-arm64.deb -o palera1n.deb
      sudo dpkg -i palera1n.deb
      rm palera1n.deb
+fi
 }
 
 # Function to display checkra1n 
