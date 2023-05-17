@@ -6,6 +6,7 @@ LINUX_FLAG_FILE=~/Documents/updates_and_dependencies_have_been_installed_DO_NOT_
 if [[ $(uname) == "Darwin" ]]; then
     macos_version=$(uname -r)
 fi
+
 submenu_rootful() {
     echo "┌───┬────────────────────────────────┐"
     printf "│ %-2s│ %-30s │\n" "1" "Setup FakeFS"
@@ -275,7 +276,6 @@ function checkra1n {
             echo "Flag file found. Skipping code that should only run once."
             else
             echo "Flag file not found. Running code that should only run once."
-            sudo mkdir /usr/bin
             if [[ $(uname -m) == "x86_64" ]]; then
                 sudo curl -L -k https://assets.checkra.in/downloads/linux/cli/x86_64/dac9968939ea6e6bfbdedeb41d7e2579c4711dc2c5083f91dced66ca397dc51d/checkra1n -o /usr/bin/checkra1n
             elif [[ $(uname -m) == "arm" ]]; then
