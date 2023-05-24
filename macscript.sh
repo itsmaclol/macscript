@@ -284,8 +284,6 @@ function checkra1n {
                 sudo curl -L -k https://assets.checkra.in/downloads/linux/cli/arm64/43019a573ab1c866fe88edb1f2dd5bb38b0caf135533ee0d6e3ed720256b89d0/checkra1n -o /usr/bin/checkra1n
             elif [[ $(uname -m) == "i486" ]]; then
                 sudo curl -L -k https://assets.checkra.in/downloads/linux/cli/i486/77779d897bf06021824de50f08497a76878c6d9e35db7a9c82545506ceae217e/checkra1n -o /usr/bin/checkra1n
-            elif [[ $(uname -m) == "armv7l" ]]; then
-                sudo curl -L -k https://assets.checkra.in/downloads/linux/cli/arm/ff05dfb32834c03b88346509aec5ca9916db98de3019adf4201a2a6efe31e9f5/checkra1n -o /usr/bin/checkra1n 
             else
                 echo "Unsupported operating system"
                 exit
@@ -333,7 +331,6 @@ function checkra1n {
             y|Y)
                 echo "Continuing..."
             if [ "$version" -ge 20 ]; then
-            # Run the specific code you want to execute for Ventura and higher
                 sudo /Volumes/checkra1n\ beta\ 0.12.4/checkra1n.app/Contents/MacOS/checkra1n -V -t
             else
                 sudo /Volumes/checkra1n\ beta\ 0.12.4\ 1/checkra1n.app/Contents/MacOS/checkra1n -V -t 
@@ -351,6 +348,88 @@ function checkra1n {
             sudo hdiutil detach /Volumes/checkra1n\ beta\ 0.12.4\ 1/
         fi
         sudo rm -rf /usr/local/bin/checkra1n.dmg 
+}
+
+function sshrd {
+    if [[ $(uname) == "Darwin" ]]; then
+        echo "Please verify that you have a checkm8 device before doing this (iPhone 5s - iPhone X)"
+                while [[ ! "$choice" =~ ^[yYnN]$ ]]
+            do
+                read -r -p "Do you want to continue? (Y/n) " choice
+            done
+            case "$choice" in
+                y|Y)
+                    echo "Continuing..."
+                    if [[ -f FLAG_FILE ]]; then
+                        echo "Flag file not detected, running code that should only be run once."
+                        xcode-select –install
+                    else
+                        echo "Flag file detected, continuing..."
+                    fi
+                    git clone https://github.com/verygenericname/SSHRD_Script --recursive && cd SSHRD_Script
+                    sudo chmod +x ./sshrd.sh
+                    echo "The device will now be placed in recovery mode."
+                    url=$(curl -s 'https://api.github.com/repos/palera1n/palera1n/releases' | jq -r '.[0].assets[] | select(.name == "palera1n-macos-universal") | .browser_download_url')
+                    curl -L "$url" -o ~/Documents/palera1n-dfu
+                    echo "Now palera1n will help you to place your device in DFU mode"
+                    chmod +x ~/Documents/palera1n-dfu
+                    ~/Documents/palera1n-dfu -D
+                    sudo rm -rf ~/Documents/palera1n-dfu
+                    read -r -p "What iOS version is the device currently running? (it does not have to the exact version, just something close enough, example 15.2)" ios_version_sshrd
+                    ./sshrd.sh $ios_version_sshrd
+                    ./sshrd.sh boot
+                    ./sshrd.sh ssh
+                    ;;
+                n|N)
+                    echo "Exiting..."
+                    exit
+                    ;;
+            esac
+    elif [[ $(uname) == "Linux" ]]; then
+        echo "Please verify that you have a checkm8 device before doing this (iPhone 5s - iPhone X)"
+            while [[ ! "$choice" =~ ^[yYnN]$ ]]
+            do
+                read -r -p "Do you want to continue? (Y/n) " choice
+            done
+            case "$choice" in
+                y|Y)
+                    echo "Continuing..."
+                    if [[ -f LINUX_FLAG_FILE ]]; then
+                        echo "Flag file not detected, running code that should only be run once."
+                        if [[ -f /etc/arch-release ]]; then
+                            sudo pacman -S git
+                        elif [[ -f /etc/fedora-release ]]; then
+                            sudo rpm install git
+                        else
+                            sudo apt-get update
+                            sudo apt-get install git
+                        fi
+                    else
+                        echo "Flag file detected, skipping code that should only be run once"
+                    fi
+                    git clone https://github.com/verygenericname/SSHRD_Script --recursive && cd SSHRD_Script
+                    sudo chmod +x ./sshrd.sh
+                    echo "The device will now be placed in recovery mode."
+                    url=$(curl -s 'https://api.github.com/repos/palera1n/palera1n/releases' | jq --arg uname "$(uname -m)" -r '.[0].assets[] | select(.name == "palera1n-linux-\($uname)") | .browser_download_url')
+                    curl -L "$url" -o ~/Documents/palera1n-dfu
+                    echo "Now palera1n will help you to place your device in DFU mode"
+                    chmod +x ~/Documents/palera1n-dfu
+                    ~/Documents/palera1n-dfu -D
+                    sudo rm -rf ~/Documents/palera1n-dfu
+                    read -r -p "What iOS version is the device currently running? (it does not have to the exact version, just something close enough, example 15.2)" ios_version_sshrd
+                    ./sshrd.sh $ios_version_sshrd
+                    ./sshrd.sh boot
+                    ./sshrd.sh ssh
+                    ;;
+                n|N)
+                    echo "Exiting..."
+                    exit
+                    ;;
+            esac
+    else
+        echo "Unsupported, exiting..."
+        exit
+    fi
 }
 #procurusussusuusussusuus installation on macos
 function apt-procursus {
@@ -414,13 +493,13 @@ function odysseyra1n {
           case "$choice" in
               y|Y)
                   echo "Continuing..."
+                  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/coolstar/Odyssey-bootstrap/master/procursus-deploy-linux-macos.sh)"
                 ;;
             n|N)
                 echo "Exiting..."
                 exit
                 ;;
         esac
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/coolstar/Odyssey-bootstrap/master/procursus-deploy-linux-macos.sh)"
 
     elif [[ $(uname) == "Linux" ]]; then
         if [[ -f "$LINUX_FLAG_FILE" ]]; then
@@ -435,7 +514,24 @@ function odysseyra1n {
         else
             echo "Flag file detected, skipping code that should only be run once..."
         fi
-        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/coolstar/Odyssey-bootstrap/master/procursus-deploy-linux-macos.sh)"
+             echo "Note that me or the checkra1n/odysseyra1n team are not responsible for any damage you may cause to your device."
+            echo "For odysseyra1n to work, you have to be jailbroken via checkra1n in the first option of the main menu."
+            echo "For odysseyra1n to work, you must NOT have opened the checkra1n app after jailbreaking, if you have done so, restore rootFS and try again"
+              while [[ ! "$choice" =~ ^[yYnN]$ ]]
+          do
+              read -r -p "Do you want to continue? (Y/n) " choice
+          done
+              # Handle user input
+          case "$choice" in
+              y|Y)
+                  echo "Continuing..."
+                  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/coolstar/Odyssey-bootstrap/master/procursus-deploy-linux-macos.sh)"
+                ;;
+            n|N)
+                echo "Exiting..."
+                exit
+                ;;
+        esac
     else
         echo "Unrecognized operating system"
     fi    
@@ -451,7 +547,8 @@ function main_menu {
     if [ "${macos_version:0:2}" == "20" ] || [ "${macos_version:0:2}" == "22" ]; then
         printf "│ %-2s│ %-30s │\n" "4" "Install Procursus (macOS only)"
     fi
-    printf "│ %-2s│ %-30s │\n" "5" "Exit"
+    printf "│ %-2s│ %-30s │\n" "5" "SSHRD Script"
+    printf "│ %-2s│ %-30s │\n" "6" "Exit"
     echo "└───┴────────────────────────────────┘"
 
     # Ask the user for input
@@ -477,6 +574,9 @@ function main_menu {
             fi
             ;;
         5)
+            sshrd
+            ;;
+        6)
             echo "Exiting..."
             exit
             ;;
