@@ -379,6 +379,8 @@ function sshrd {
                     ./sshrd.sh $ios_version_sshrd
                     ./sshrd.sh boot
                     ./sshrd.sh ssh
+                    cd ..
+                    rm -rf SSHRD_Script
                     ;;
                 n|N)
                     echo "Exiting..."
@@ -420,6 +422,8 @@ function sshrd {
                     ./sshrd.sh $ios_version_sshrd
                     ./sshrd.sh boot
                     ./sshrd.sh ssh
+                    cd ..
+                    rm -rf SSHRD_Script
                     ;;
                 n|N)
                     echo "Exiting..."
