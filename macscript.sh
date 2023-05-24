@@ -253,29 +253,15 @@ elif [[ $(uname) == "Darwin" ]]; then
     echo "Unknown Operation system, Exiting..."
     exit
     fi
-#iOS Part
-if [[ $(dpkg --print-architecture) == "iphoneos-arm" ]]; then
-     rm /usr/local/bin/palera1n
-     cd /var/mobile/Documents/
-     curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n_2.0.0-beta.6_iphoneos-arm.deb -o palera1n.deb
-     sudo dpkg -i palera1n.deb
-     rm palera1n.deb
-elif [[ $(dpkg --print-architecture) == "iphoneos-arm64" ]]; then
-     rm /usr/local/bin/palera1n
-     cd /var/mobile/Documents/
-     curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n_2.0.0-beta.6_iphoneos-arm64.deb -o palera1n.deb
-     sudo dpkg -i palera1n.deb
-     rm palera1n.deb
-fi
 }
 
 # Function to display checkra1n 
 function checkra1n {
     if [[ $(uname) == "Linux" ]]; then
         if [ -f "$LINUX_FLAG_FILE" ]; then
-            echo "Flag file found. Skipping code that should only run once."
+                echo "Flag file found. Skipping code that should only run once."
             else
-            echo "Flag file not found. Running code that should only run once."
+                echo "Flag file not found. Running code that should only run once."
             if [[ $(uname -m) == "x86_64" ]]; then
                 sudo curl -L -k https://assets.checkra.in/downloads/linux/cli/x86_64/dac9968939ea6e6bfbdedeb41d7e2579c4711dc2c5083f91dced66ca397dc51d/checkra1n -o /usr/bin/checkra1n
             elif [[ $(uname -m) == "arm" ]]; then
@@ -306,18 +292,15 @@ function checkra1n {
         esac
             sudo chmod +x /usr/bin/checkra1n
             sudo /usr/bin/checkra1n -t -V
-
             # Create the flag file
             touch "$LINUX_FLAG_FILE"
         fi
-    fi
-    if [[ $(uname) == "Darwin" ]]; then
+    elif [[ $(uname) == "Darwin" ]]; then
         sudo curl -L -k https://assets.checkra.in/downloads/macos/754bb6ec4747b2e700f01307315da8c9c32c8b5816d0fe1e91d1bdfc298fe07b/checkra1n%20beta%200.12.4.dmg -o /usr/local/bin/checkra1n.dmg
         sudo hdiutil attach /usr/local/bin/checkra1n.dmg
         # Prompt user for input
         echo "In this next screen, you need to enable untested iOS versions if you are on an iOS version higher than 14.5.1"
         echo "Please note that the checkra1n team or me is not viable for any damage you might cause to your device"
-        version=$(uname -r | cut -d '.' -f 1)
         read -r -p "Do you want to continue? (y/n) " choice
 
         # Loop to handle invalid input
@@ -330,10 +313,12 @@ function checkra1n {
         case "$choice" in
             y|Y)
                 echo "Continuing..."
-            if [ "$version" -ge 20 ]; then
-                sudo /Volumes/checkra1n\ beta\ 0.12.4/checkra1n.app/Contents/MacOS/checkra1n -V -t
-            else
+            if [[ $(uname -r) == "20."* ]]; then
                 sudo /Volumes/checkra1n\ beta\ 0.12.4\ 1/checkra1n.app/Contents/MacOS/checkra1n -V -t 
+            elif [[ $(uname -r) == "21."* ]]; then
+                sudo /Volumes/checkra1n\ beta\ 0.12.4\ 1/checkra1n.app/Contents/MacOS/checkra1n -V -t
+            else
+                sudo /Volumes/checkra1n\ beta\ 0.12.4/checkra1n.app/Contents/MacOS/checkra1n -V -t 
             fi
                 ;;
             n|N)
@@ -378,6 +363,7 @@ function sshrd {
                     read -r -p "What iOS version is the device currently running? (it does not have to the exact version, just something close enough, example 15.2)" ios_version_sshrd
                     ./sshrd.sh $ios_version_sshrd
                     ./sshrd.sh boot
+                    sleep 15
                     ./sshrd.sh ssh
                     cd ..
                     rm -rf SSHRD_Script
@@ -473,6 +459,8 @@ function apt-procursus {
         rm bootstrap.tar.zst bootstrap.tar
         echo "Installation Complete! Be sure to restart your terminal!"
             fi
+        else
+            echo "Not Supported"
         fi
 }
 
