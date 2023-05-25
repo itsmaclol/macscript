@@ -1,11 +1,8 @@
 #!/usr/bin/env bash
 #variable defenitions
 if [ "$(id -u)" -ne 0 ]; then echo "Please run as root." >&2; exit 1; fi
-FLAG_FILE=~/Documents/dependencies_have_been_installed_DO_NOT_DELETE
-LINUX_FLAG_FILE=~/Documents/updates_and_dependencies_have_been_installed_DO_NOT_DELETE
-if [[ $(uname) == "Darwin" ]]; then
-    macos_version=$(uname -r)
-fi
+FLAG_FILE=~/Documents/macscript_updates_do_not_delete
+LINUX_FLAG_FILE=~/Documents/macscript_updates_do_not_delete
 
 submenu_rootful() {
     echo "┌───┬────────────────────────────────┐"
@@ -200,58 +197,384 @@ function palera1n_main_menu {
     esac
 }
 
+function b5_submenu_rootful {
+        echo "Warning!, You are in the palera1n Beta 5 Menu!"
+        echo "┌───┬────────────────────────────────┐"
+    printf "│ %-2s│ %-30s │\n" "1" "Setup FakeFS"
+    printf "│ %-2s│ %-30s │\n" "2" "Setup BindFS"
+    printf "│ %-2s│ %-30s │\n" "3" "Boot"
+    printf "│ %-2s│ %-30s │\n" "4" "Enter Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "5" "Exit Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "6" "Safe Mode"
+    printf "│ %-2s│ %-30s │\n" "7" "Restore RootFS"
+    printf "│ %-2s│ %-30s │\n" "8" "DFU Helper"
+    printf "│ %-2s│ %-30s │\n" "9" "Back"
+    printf "│ %-2s│ %-30s │\n" "10" "Exit"
+    echo "└───┴────────────────────────────────┘"
+    read -r -p "Enter the number of the option you want to select: " selection
+    case $selection in
+        1)
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n_b5 -c -f -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n_b5 -c -f -V
+            fi
+            ;;
+        2)
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n_b5 -f -V -B
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n -f -V -B
+            fi
+            ;;
+        3)
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n_b5 -f -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n -f -V
+            fi
+            ;;
+        4)
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n_b5 -E
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n_b5 -E
+            fi
+            ;;
+        5)
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n_b5 -n
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n_b5 -n
+            fi
+            ;;
+        6)
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n_b5 -s -V -f
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n_b5 -s -V -f
+            fi 
+            ;;
+        7)
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n_b5 --force-revert -f -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n_b5 --force-revert -f -V
+            fi
+            ;;
+        8)
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n_b5 -D -f -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n_b5 -D -f -V
+            fi
+            ;;
+        9)
+            b5_palera1n_main_menu
+            ;;
+        10)
+            exit
+            ;;
+        *)
+            echo "Invalid selection"
+            ;;
+    esac
+}
+
+function b5_submenu_rootless {
+        echo "Warning! This is palera1n Beta 5!"
+        echo "┌───┬────────────────────────────────┐"
+    printf "│ %-2s│ %-30s │\n" "1" "Boot"
+    printf "│ %-2s│ %-30s │\n" "2" "Enter Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "3" "Exit Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "4" "DFU Helper"
+    printf "│ %-2s│ %-30s │\n" "5" "Restore RootFS"
+    printf "│ %-2s│ %-30s │\n" "6" "Back"
+    printf "│ %-2s│ %-30s │\n" "7" "Exit"
+    echo "└───┴────────────────────────────────┘"
+    read -r -p "Enter the number of the option you want to select: " selection
+
+    # Check the user's selection and execute the appropriate command
+    case $selection in
+        1)
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n_b5 -l -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n_b5 -l -V
+            else
+                echo "Not supported, exiting..."
+                exit
+            fi
+            ;;
+        2)
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n_b5 -E
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n_b5 -E
+            else
+                echo "Not supported, exiting..."
+                exit
+            fi
+            ;;
+        3)
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n_b5 -n
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n_b5 -n
+            else
+                echo "Not supported, exiting..."
+                exit
+            fi
+            ;;
+        4)
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n_b5 -D -l -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n_b5 -D -l -V
+            else
+                echo "Not supported, exiting..."
+                exit
+            fi
+            ;;
+        5)
+            if [[ $(uname) == "Darwin" ]]; then
+                /usr/local/bin/palera1n_b5 --force-revert -V
+            elif [[ $(uname) == "Linux" ]]; then
+                /usr/bin/palera1n_b5 --force-revert -V
+            else
+                echo "Not supported, exiting..."
+                exit
+            fi
+            ;;
+        6)
+            echo "Going back to previous menu..."
+            b5_palera1n_main_menu
+            ;;
+        7)
+            exit
+            ;;
+        *)
+            echo "Invalid selection"
+            ;;
+    esac
+}
+
+
+function b5_palera1n_main_menu {
+        echo "Warning!, This is palera1n Beta 5!"
+        echo "Welcome to the palera1n submenu!"
+    echo "┌───┬────────────────────────────────┐"
+    printf "│ %-2s│ %-30s │\n" "1" "Rootful"
+    printf "│ %-2s│ %-30s │\n" "2" "Rootless"
+    printf "│ %-2s│ %-30s │\n" "3" "Back"
+    printf "│ %-2s│ %-30s │\n" "4" "Exit"
+    echo "└───┴────────────────────────────────┘"
+
+# Ask the user for input
+    read -r -p "Enter the number of what you want to do: " selection
+
+    # Check the user's selection and execute the appropriate command
+    case $selection in
+        1)
+            b5_submenu_rootful
+            ;;
+        2)
+            b5_submenu_rootless
+            ;;
+        3)
+            main_menu
+            ;;
+        4)
+            exit
+            ;;
+        *)
+            echo "Invalid selection"
+            ;;
+    esac
+}
+
+
+#temporarily
+function b5_palera1n {
+    if [[ $(uname) == "Linux" ]]; then
+        if [ -f "$LINUX_FLAG_FILE" ]; then
+            echo "Flag file found. Skipping code that should only run once."
+        else
+            echo "Flag file not found. Running code that should only run once."
+        if [ -f "/etc/arch-release" ]; then
+            sudo pacman -Sy
+            sudo pacman -Syu
+            sudo pacman -S curl wget usbmuxd jq
+        elif [ -f "/etc/fedora-release" ]; then
+            sudo dnf update -y
+            sudo dnf upgrade -y
+            sudo dnf install -y curl wget usbmuxd jq
+        else
+            sudo apt update
+            sudo apt upgrade -y
+            sudo apt install curl wget usbmuxd jq -y
+        fi
+        # Create the flag file
+        sudo touch "$LINUX_FLAG_FILE"
+        fi
+        curl -L https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.5/palera1n-linux-$(uname -m) -o /usr/bin/palera1n_b5
+        sudo chmod +x /usr/bin/palera1n_b5
+        #call main menu function
+        b5_palera1n_main_menu
+    elif [[ $(uname) == "Darwin" ]]; then
+        # Create the flag file
+        touch "$FLAG_FILE"
+        sudo mkdir -p /usr/local/bin
+        echo "Downloading palera1n"        
+        sudo curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.5/palera1n-macos-universal -o /usr/local/bin/palera1n_b5
+        sudo chmod +x /usr/local/bin/palera1n_b5
+        b5_palera1n_main_menu
+    else
+        echo "Unknown Operation system, Exiting..."
+        exit
+    fi
+}
+
 
 function palera1n {
-if [[ $(uname) == "Linux" ]]; then
-    if [ -f "$LINUX_FLAG_FILE" ]; then
-        echo "Flag file found. Skipping code that should only run once."
+    if [[ $(uname) == "Linux" ]]; then
+        if [ -f "$LINUX_FLAG_FILE" ]; then
+            echo "Flag file found. Skipping code that should only run once."
+        else
+            echo "Flag file not found. Running code that should only run once."
+            if [ -f "/etc/arch-release" ]; then
+                sudo pacman -Sy
+                sudo pacman -Syu
+                sudo pacman -S curl wget usbmuxd jq
+            elif [ -f "/etc/fedora-release" ]; then
+                sudo dnf update -y
+                sudo dnf upgrade -y
+                sudo dnf install -y curl wget usbmuxd jq
+            else
+                sudo apt update
+                sudo apt upgrade -y
+                sudo apt install curl wget usbmuxd jq -y
+            fi
+            sudo mkdir /usr/bin/
+            sudo chmod +x /usr/bin/palera1n
+            # Create the flag file
+            sudo touch "$LINUX_FLAG_FILE"
+        fi
+        #thx alexia for this url thingy
+        REPO_URL="https://api.github.com/repos/palera1n/palera1n/releases"
+        LOCK_FILE="$HOME/macscript_palera1n.lock"
+        palera1n_get() {
+            if [[ $(uname) == "Darwin" ]]; then
+                BIN_URL=$(curl -s 'https://api.github.com/repos/palera1n/palera1n/releases' | jq -r '.[0].assets[] | select(.name == "palera1n-macos-universal") | .browser_download_url')
+            elif [[ $(uname) == "Linux" ]]; then
+                BIN_URL=$(curl -s 'https://api.github.com/repos/palera1n/palera1n/releases' | jq --arg uname "$(uname -m)" -r '.[0].assets[] | select(.name == "palera1n-linux-\($uname)") | .browser_download_url')
+            else
+                echo "Unsupported, Exiting..."
+                exit
+            fi
+            if [[ $(uname) == "Darwin" ]]; then
+                sudo curl -L $BIN_URL -o /usr/local/bin/palera1n
+                sudo chmod +x /usr/local/bin/palera1n
+            elif [[ $(uname) == "Linux" ]]; then
+                sudo curl -L $BIN_URL -o /usr/bin/palera1n
+                sudo chmod +x /usr/bin/palera1n
+            else
+                echo "Unsupported, Exiting..."
+                exit
+            fi
+        }
+        #get release from gh
+        fetch_latest_version() {
+            latest_version=$(curl -s $REPO_URL | grep -o '"tag_name": ".*"' | cut -d'"' -f4)
+            echo "$latest_version"
+        }
+
+        # update lock with version
+        update_lock_file() {
+            latest_version=$1
+            echo "$latest_version" > $LOCK_FILE
+            echo "Lock file updated with version $latest_version"
+        }
+
+        # read version from lock file
+        current_version=$(cat $LOCK_FILE 2>/dev/null)
+
+        # give me the release 
+        latest_version=$(fetch_latest_version)
+
+        # compare versions and update if needed
+        if [[ -z "$current_version" ]]; then
+            echo "Lock file not found. Creating a new one..."
+            update_lock_file "$latest_version"
+            palera1n_get
+        elif [[ "$current_version" != "$latest_version" ]]; then
+            echo "New version available. Updating lock file..."
+            update_lock_file "$latest_version"
+            palera1n_get
+        else
+            echo "Lock file is up to date."
+        fi
+        #call main menu function
+        palera1n_main_menu
+    elif [[ $(uname) == "Darwin" ]]; then
+        echo "Downloading palera1n"        
+         REPO_URL="https://api.github.com/repos/palera1n/palera1n/releases"
+        LOCK_FILE="$HOME/macscript_palera1n.lock"
+        palera1n_get() {
+            if [[ $(uname) == "Darwin" ]]; then
+                BIN_URL=$(curl -s 'https://api.github.com/repos/palera1n/palera1n/releases' | jq -r '.[0].assets[] | select(.name == "palera1n-macos-universal") | .browser_download_url')
+            elif [[ $(uname) == "Linux" ]]; then
+                BIN_URL=$(curl -s 'https://api.github.com/repos/palera1n/palera1n/releases' | jq --arg uname "$(uname -m)" -r '.[0].assets[] | select(.name == "palera1n-linux-\($uname)") | .browser_download_url')
+            else
+                echo "Unsupported, Exiting..."
+                exit
+            fi
+            if [[ $(uname) == "Darwin" ]]; then
+                sudo curl -L $BIN_URL -o /usr/local/bin/palera1n
+                sudo chmod +x /usr/local/bin/palera1n
+            elif [[ $(uname) == "Linux" ]]; then
+                sudo curl -L $BIN_URL -o /usr/bin/palera1n
+                sudo chmod +x /usr/bin/palera1n
+            else
+                echo "Unsupported, Exiting..."
+                exit
+            fi
+        }
+        #get release from gh
+        fetch_latest_version() {
+            latest_version=$(curl -s $REPO_URL | grep -o '"tag_name": ".*"' | cut -d'"' -f4)
+            echo "$latest_version"
+        }
+
+        # update lock with version
+        update_lock_file() {
+            latest_version=$1
+            echo "$latest_version" > $LOCK_FILE
+            echo "Lock file updated with version $latest_version"
+        }
+
+        # read version from lock file
+        current_version=$(cat $LOCK_FILE 2>/dev/null)
+
+        # give me the release 
+        latest_version=$(fetch_latest_version)
+
+        # compare versions and update if needed
+        if [[ -z "$current_version" ]]; then
+            echo "Lock file not found. Creating a new one..."
+            update_lock_file "$latest_version"
+            palera1n_get
+        elif [[ "$current_version" != "$latest_version" ]]; then
+            echo "New version available. Updating lock file..."
+            update_lock_file "$latest_version"
+            palera1n_get
+        else
+            echo "Lock file is up to date."
+        fi
+        palera1n_main_menu
     else
-        echo "Flag file not found. Running code that should only run once."
-    if [ -f "/etc/arch-release" ]; then
-        sudo pacman -Sy
-        sudo pacman -Syu
-        sudo pacman -S curl wget usbmuxd jq
-    elif [ -f /etc/fedora-release ]; then
-        sudo dnf update -y
-        sudo dnf upgrade -y
-        sudo dnf install -y curl wget usbmuxd jq
-    else
-        sudo apt update
-        sudo apt upgrade -y
-        sudo apt install curl wget usbmuxd jq -y
-    fi
-    sudo mkdir /usr/bin/
-    sudo chmod +x /usr/bin/palera1n
-    # Create the flag file
-    sudo touch "$LINUX_FLAG_FILE"
-    fi
-    #thx alexia for this url thingy
-    url=$(curl -s 'https://api.github.com/repos/palera1n/palera1n/releases' | jq --arg uname "$(uname -m)" -r '.[0].assets[] | select(.name == "palera1n-linux-\($uname)") | .browser_download_url')
-    sudo curl -L -k "$url" -o /usr/bin/palera1n
-    #call main menu function
-    palera1n_main_menu
-elif [[ $(uname) == "Darwin" ]]; then
-    if [ -f "$FLAG_FILE" ]; then
-        echo "Flag file found. Skipping code that should only run once."
-    else
-        echo "Flag file not found. Running code that should only run once."
-        echo "Installing pip dependencies..."
-        #pip dependencies (not really needed might remove in the future)
-      if [[ $(echo "${macos_version} < 21.3.0" | bc -l) -eq 1 ]]; then
-        sudo python -m ensurepip
-        sudo python -m pip install setuptools xattr==0.6.4
-      fi
-    # Create the flag file
-    touch "$FLAG_FILE"
-    fi
-    sudo mkdir -p /usr/local/bin
-    echo "Downloading palera1n"        
-    sudo curl -L -k https://github.com/palera1n/palera1n/releases/download/v2.0.0-beta.6.2/palera1n-macos-universal -o /usr/local/bin/palera1n
-    sudo chmod +x /usr/local/bin/palera1n
-    palera1n_main_menu
-    else
-    echo "Unknown Operation system, Exiting..."
-    exit
+        echo "Unknown Operation system, Exiting..."
+        exit
     fi
 }
 
@@ -345,7 +668,7 @@ function sshrd {
             case "$choice" in
                 y|Y)
                     echo "Continuing..."
-                    if [[ -f FLAG_FILE ]]; then
+                    if [[ -f SSHRD_FLAG_FILE ]]; then
                         echo "Flag file not detected, running code that should only be run once."
                         xcode-select –install
                     else
@@ -409,7 +732,7 @@ function sshrd {
                     ./sshrd.sh boot
                     ./sshrd.sh ssh
                     cd ..
-                    rm -rf SSHRD_Script
+                    rm -rf SSHRD_Script ~/Documents/palera1n-dfu
                     ;;
                 n|N)
                     echo "Exiting..."
@@ -536,11 +859,16 @@ function main_menu {
     printf "│ %-2s│ %-30s │\n" "1" "Install checkra1n"
     printf "│ %-2s│ %-30s │\n" "2" "Run the odysseyra1n Script"
     printf "│ %-2s│ %-30s │\n" "3" "Install palera1n"
-    if [ "${macos_version:0:2}" == "20" ] || [ "${macos_version:0:2}" == "22" ]; then
-        printf "│ %-2s│ %-30s │\n" "4" "Install Procursus (macOS only)"
+    printf "│ %-2s│ %-30s │\n" "4" "Install palera1n (Beta 5)"
+    if [[ $(uname -r) == "20."* ]]; then
+        printf "│ %-2s│ %-30s │\n" "5" "Install Procursus (macOS only)"
+    elif [[ $(uname -r) == "21."* ]]; then
+        printf "│ %-2s│ %-30s │\n" "5" "Install Procursus (macOS only)"
+    elif [[ $(uname -r) == "22."* ]]; then
+        printf "│ %-2s│ %-30s │\n" "5" "Install Procursus (macOS only)"
     fi
-    printf "│ %-2s│ %-30s │\n" "5" "SSHRD Script"
-    printf "│ %-2s│ %-30s │\n" "6" "Exit"
+    printf "│ %-2s│ %-30s │\n" "6" "SSHRD Script"
+    printf "│ %-2s│ %-30s │\n" "7" "Exit"
     echo "└───┴────────────────────────────────┘"
 
     # Ask the user for input
@@ -558,17 +886,24 @@ function main_menu {
             palera1n
             ;;
         4)
-            if [ "${macos_version:0:2}" == "20" ] || [ "${macos_version:0:2}" == "21" ] || [ "${macos_version:0:2}" == "22" ]; then
+            b5_palera1n
+            ;;
+        5)
+            if [[ $(uname -r) == "20."* ]]; then
+                apt-procursus
+            elif [[ $(uname -r) == "21."* ]]; then
+                apt-procursus
+            elif [[ $(uname -r) == "22."* ]]; then
                 apt-procursus
             else
                 echo "Not supported, exiting..."
                 exit
             fi
             ;;
-        5)
+        6)
             sshrd
             ;;
-        6)
+        7)
             echo "Exiting..."
             exit
             ;;
