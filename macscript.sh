@@ -668,7 +668,7 @@ function sshrd {
             case "$choice" in
                 y|Y)
                     echo "Continuing..."
-                    if [[ -f SSHRD_FLAG_FILE ]]; then
+                    if [[ -f FLAG_FILE ]]; then
                         echo "Flag file not detected, running code that should only be run once."
                         xcode-select –install
                     else
