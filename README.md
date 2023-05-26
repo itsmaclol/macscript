@@ -9,6 +9,7 @@ Backups are recommended, continue at your own risk.
 ## Installation
 
 Just run the following in your terminal:
+
 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsmaclol/macscript/main/macscript.sh)"`
 
 PS: Do NOT use the script on [my cdn](https://cdn.planks.ml/scripts) because it is broken and very old.
