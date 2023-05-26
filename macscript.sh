@@ -224,14 +224,14 @@ function b5_submenu_rootful {
             if [[ $(uname) == "Darwin" ]]; then
                 /usr/local/bin/palera1n_b5 -f -V -B
             elif [[ $(uname) == "Linux" ]]; then
-                /usr/bin/palera1n -f -V -B
+                /usr/bin/palera1n_b5 -f -V -B
             fi
             ;;
         3)
             if [[ $(uname) == "Darwin" ]]; then
                 /usr/local/bin/palera1n_b5 -f -V
             elif [[ $(uname) == "Linux" ]]; then
-                /usr/bin/palera1n -f -V
+                /usr/bin/palera1n_b5 -f -V
             fi
             ;;
         4)
