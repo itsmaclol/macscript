@@ -169,7 +169,7 @@ function palera1n_main_menu {
     echo "Welcome to the palera1n submenu!"
     echo "┌───┬────────────────────────────────┐"
     printf "│ %-2s│ %-30s │\n" "1" "Rootful"
-    printf "│ %-2s│ %-30s │\n" "2" "Rootless"
+    printf "│ %-2s│ %-30s │\n" "2" "Rootless (Recommended)"
     printf "│ %-2s│ %-30s │\n" "3" "Back"
     printf "│ %-2s│ %-30s │\n" "4" "Exit"
     echo "└───┴────────────────────────────────┘"
