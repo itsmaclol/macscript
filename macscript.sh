@@ -4,26 +4,7 @@
 os=$(uname)
 arch_check=$(uname -m)
 # Taken entirely from palera1n install.sh
-case "$os" in
-    Linux)
-        os_name="Linux"
-    ;;
-    Darwin)
-        if [ "$(uname -r | cut -d. -f1)" -gt "15" ]; then
-            os_name="macOS"
-        elif [ "$(uname -m | head -c2)" = "iP" ]; then
-            error "This script is not meant to be used on an iDevice. Please use a PC to use this script."
-            exit 1
-        else
-            os_name="Mac OS X"
-        fi
-        arch_check=$(uname -m)
-    ;;
-    *)
-        error "Unknown or unsupported OS ($os)."
-        exit 1
-    ;;
-esac
+
 
 # macOS Version
 case $os in
@@ -55,6 +36,34 @@ warning() {
 }
 
 if [ "$(id -u)" -ne 0 ]; then error "This script will not run without root or sudo." >&2; exit 1; fi
+
+case "$os" in
+    Linux)
+        if grep -qi Microsoft /proc/version > /dev/null 2>&1; then
+            error "You are running WSL, This script does not support WSL."
+               exit 1
+        else
+            echo "Not running WSL"
+        fi
+
+        os_name="Linux"
+    ;;
+    Darwin)
+        if [ "$(uname -r | cut -d. -f1)" -gt "15" ]; then
+            os_name="macOS"
+        elif [ "$(uname -m | head -c2)" = "iP" ]; then
+            error "This script is not meant to be used on an iDevice. Please use a PC to use this script."
+            exit 1
+        else
+            os_name="Mac OS X"
+        fi
+        arch_check=$(uname -m)
+    ;;
+    *)
+        error "Unknown or unsupported OS ($os)."
+        exit 1
+    ;;
+esac
 
 case $1 in
     --remove-procursus )
