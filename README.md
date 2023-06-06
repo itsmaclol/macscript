@@ -34,6 +34,15 @@ Installation of the Procursus bootstrap on macOS (Big Sur and above).
 
 [seprmvr64](https://github.com/mineek/seprmvr64) support coming soon, (maybe)
 
+# Using the script locally
+
+```
+git clone https://github.com/itsmaclol/macscript.git
+cd macscript
+chmod +x ./macscript.sh
+./macscript.sh
+```
+
 ## Credits
 genesis. for the fix for Procursus on macOS and for the iOS palera1n installation part.
 
