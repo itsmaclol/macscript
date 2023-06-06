@@ -21,10 +21,16 @@ macn1x (bootable Linux distro for macscript) is coming soon.
 Check out the [Discord](https://discord.gg/4nAfQthY6h)
 and the [GUI](https://github.com/itsmaclol/macscript-gui)
 
+# Usage
+
+Use the flag `--remove-procursus` to uninstall the procursus bootstrap on your mac
+
 ## Features
 Easy installation of palera1n/odysseyra1n/checkra1n (macOS and Linux).
 
 Installation of the Procursus bootstrap on macOS (Big Sur and above).
+
+[SSHRD_Script](https://github.com/verygenericname/sshrd_script) (macOS and Linux).
 
 [seprmvr64](https://github.com/mineek/seprmvr64) support coming soon, (maybe)
 
