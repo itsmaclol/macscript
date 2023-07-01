@@ -8,6 +8,8 @@ Backups are recommended, continue at your own risk.
 
 ## Installation
 
+jq is REQUIRED for macscript to work correctly, so install it via `brew install jq` or `apt install jq`
+
 Just run the following in your terminal:
 
 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsmaclol/macscript/main/macscript.sh)"`
