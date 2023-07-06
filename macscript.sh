@@ -363,14 +363,15 @@ submenu_rootful() {
     echo "┌───┬────────────────────────────────┐"
     printf "│ %-2s│ %-30s │\n" "1" "Setup FakeFS"
     printf "│ %-2s│ %-30s │\n" "2" "Setup BindFS"
-    printf "│ %-2s│ %-30s │\n" "3" "Boot"
-    printf "│ %-2s│ %-30s │\n" "4" "Enter Recovery Mode"
-    printf "│ %-2s│ %-30s │\n" "5" "Exit Recovery Mode"
-    printf "│ %-2s│ %-30s │\n" "6" "Safe Mode"
-    printf "│ %-2s│ %-30s │\n" "7" "Restore RootFS"
-    printf "│ %-2s│ %-30s │\n" "8" "DFU Helper"
-    printf "│ %-2s│ %-30s │\n" "9" "Back"
-    printf "│ %-2s│ %-30s │\n" "10" "Exit"
+    printf "| %-2s| %-30s |\n" "3" "Clean FakeFS"
+    printf "│ %-2s│ %-30s │\n" "4" "Boot"
+    printf "│ %-2s│ %-30s │\n" "5" "Enter Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "6" "Exit Recovery Mode"
+    printf "│ %-2s│ %-30s │\n" "7" "Safe Mode"
+    printf "│ %-2s│ %-30s │\n" "8" "Restore RootFS"
+    printf "│ %-2s│ %-30s │\n" "9" "DFU Helper"
+    printf "│ %-2s│ %-30s │\n" "10" "Back"
+    printf "│ %-2s│ %-30s │\n" "11" "Exit"
     echo "└───┴────────────────────────────────┘"
     read -r -p "Enter the number of the option you want to select: " selection
     case $selection in
@@ -397,6 +398,16 @@ submenu_rootful() {
         3)
             case $os in
                 Darwin )
+                    /usr/local/bin/palera1n -f -V -C
+                ;;
+                Linux )
+                    /usr/bin/palera1n -f -V -C
+                ;;
+            esac
+            ;;
+        4)
+            case $os in
+                Darwin )
                     /usr/local/bin/palera1n -f -V
                 ;;
                 Linux )
@@ -404,7 +415,7 @@ submenu_rootful() {
                 ;;
             esac
             ;;
-        4)
+        5)
             case $os in
                 Darwin )
                     /usr/local/bin/palera1n -E
@@ -415,7 +426,7 @@ submenu_rootful() {
             esac
             
             ;;
-        5)
+        6)
             case $os in
                 Darwin )
                     /usr/local/bin/palera1n -n
@@ -425,7 +436,7 @@ submenu_rootful() {
                 ;;
             esac
             ;;
-        6)
+        7)
             case $os in
                 Darwin )
                     /usr/local/bin/palera1n -s -V -f
@@ -435,7 +446,7 @@ submenu_rootful() {
                 ;;
             esac
             ;;
-        7)
+        8)
             case $os in
                 Darwin )
                     /usr/local/bin/palera1n --force-revert -f -V
@@ -445,7 +456,7 @@ submenu_rootful() {
                 ;;
             esac
             ;;
-        8)
+        9)
             case $os in
                 Darwin )
                     /usr/local/bin/palera1n -D -f -V
@@ -455,10 +466,10 @@ submenu_rootful() {
                 ;;
             esac
             ;;
-        9) 
+        10) 
             palera1n_main_menu
             ;;
-        10)
+        11)
             exit
             ;;
         *)
