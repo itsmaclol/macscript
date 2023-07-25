@@ -14,13 +14,12 @@ Just run the following in your terminal:
 
 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsmaclol/macscript/main/macscript.sh)"`
 
-PS: Do NOT use the script on [my cdn](https://cdn.planks.ml/scripts) because it is broken and very old.
 
-PS 2.0: macscript, macscript-gui is currently in beta. Expect issues.
+PS: macscript, macscript-gui is currently in beta. Expect issues.
 
 macn1x (bootable Linux distro for macscript) is coming soon.
 
-Check out the [Discord](https://discord.gg/4nAfQthY6h)
+Check out the ~~[Discord](https://discord.gg/4nAfQthY6h)~~ 
 and the [GUI](https://github.com/itsmaclol/macscript-gui)
 
 # Usage
