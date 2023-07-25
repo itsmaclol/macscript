@@ -47,7 +47,7 @@ chmod +x ./macscript.sh
 ## Credits
 genesis. for the fix for Procursus on macOS and for the iOS palera1n installation part.
 
-Jan for helping me with some bash code and the GUI.
+Nara for helping me with some bash code and the GUI.
 
 May, for helping make the README.md *pretty*.
 
