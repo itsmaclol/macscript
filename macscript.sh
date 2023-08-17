@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/bin/bash
 
 # Thank you to palera1n install.sh for a lot of help and a lot of insipration with this script
 os=$(uname)
