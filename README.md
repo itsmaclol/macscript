@@ -19,7 +19,7 @@ PS: macscript and macscript-gui are currently in beta. Expect issues.
 
 macn1x (bootable Linux distro for macscript) is coming soon.
 
-Check out the ~~[Discord](https://discord.gg/4nAfQthY6h)~~ 
+Check out the [Discord](https://dsc.gg/macscript) 
 and the [GUI](https://github.com/itsmaclol/macscript-gui)
 
 # Usage
