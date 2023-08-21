@@ -15,7 +15,7 @@ Just run the following in your terminal:
 `/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/itsmaclol/macscript/main/macscript.sh)"`
 
 
-PS: macscript and macscript-gui are currently in beta. Expect issues.
+macscript-gui is not the best version of macscript and highly unstable, use macscript-cli for better performance.
 
 macn1x (bootable Linux distro for macscript) is coming soon.
 
