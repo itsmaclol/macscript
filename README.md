@@ -19,8 +19,7 @@ macscript-gui is not the best version of macscript and highly unstable, use macs
 
 macn1x (bootable Linux distro for macscript) is coming soon.
 
-Check out the [Discord](https://dsc.gg/macscript) 
-and the [GUI](https://github.com/itsmaclol/macscript-gui)
+Check out the [GUI](https://github.com/itsmaclol/macscript-gui)
 
 # Usage
 
@@ -43,6 +42,10 @@ cd macscript
 chmod +x ./macscript.sh
 ./macscript.sh
 ```
+
+## Discord
+If you encounter any problem using the script, Use [this](https://discord.gg/ytCvyFUN3C) invite link - This is our main Support server, And thank you for taking the time to use the script...
+You can also suggest what things to add instead of opening an issue, Your call!!!
 
 ## Credits
 genesis. for the fix for Procursus on macOS and for the iOS palera1n installation part.
