@@ -278,10 +278,10 @@ arch_url_check() {
         ;;
     esac
 }
-arch_url_check
 
 
 checkra1n() {
+    arch_url_check
     case $os in
         Linux )
             info "Detected $os_name on $arch"
@@ -331,6 +331,7 @@ odysseyra1n() {
 }
 
 sshrd() {
+    arch_url_check
     info "Detected $os_name on $arch"
     git clone https://github.com/verygenericname/SSHRD_Script --recursive && cd SSHRD_Script
     sudo chmod +x ./sshrd.sh
@@ -353,6 +354,7 @@ sshrd() {
 }
 
 apt-procursus() {
+    arch_url_check
     info "Bootstrapping procursus and installing apt..."
     case $os in
         Darwin )
